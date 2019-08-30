@@ -1,0 +1,20 @@
+PTS\SyliusOrderBatchPlugin\Entity\Batch:
+  type: entity
+  table: batch
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  manyToMany:
+    orders:
+      targetEntity: Sylius\Component\Core\Model\Order
+      nullable: true
+      cascade: ["persist"]
+  fields:
+    name:
+      type: string
+      nullable: false
+    type:
+      type: string
+      nullable: true

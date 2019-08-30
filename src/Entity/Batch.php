@@ -3,6 +3,7 @@
 namespace PTS\SyliusOrderBatchPlugin\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;

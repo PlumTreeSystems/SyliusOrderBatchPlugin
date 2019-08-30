@@ -1,0 +1,9 @@
+pts_sylius_order_batch:
+  driver: doctrine/orm
+  resources:
+    batch:
+      classes:
+        model: PTS\SyliusOrderBatchPlugin\Entity\Batch
+    filter:
+      classes:
+        model: PTS\SyliusOrderBatchPlugin\Entity\Filter

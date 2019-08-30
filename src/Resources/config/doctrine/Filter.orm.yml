@@ -1,0 +1,55 @@
+PTS\SyliusOrderBatchPlugin\Entity\Filter:
+  type: entity
+  table: filter
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  fields:
+    filterName:
+      type: string
+      nullable: false
+      unique: true
+    numberType:
+      type: string
+      nullable: true
+    numberValue:
+      type: string
+      nullable: true
+    customerType:
+      type: string
+      nullable: true
+    customerValue:
+      type: string
+      nullable: true
+    dateFrom:
+      type: datetime
+      nullable: true
+    dateTo:
+      type: datetime
+      nullable: true
+    channel:
+      type: string
+      nullable: true
+    totalGreaterThan:
+      type: string
+      nullable: true
+    totalLessThan:
+      type: string
+      nullable: true
+    totalCurrency:
+      type: string
+      nullable: true
+    orderState:
+      type: string
+      nullable: true
+    paymentState:
+      type: string
+      nullable: true
+    shippingState:
+      type: string
+      nullable: true
+    shippingCountry:
+      type: string
+      nullable: true
