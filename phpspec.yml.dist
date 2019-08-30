@@ -1,0 +1,4 @@
+suites:
+    main:
+        namespace: PTS\SyliusOrderBatchPlugin
+        psr4_prefix: PTS\SyliusOrderBatchPlugin
