@@ -1,0 +1,571 @@
+sylius_grid:
+  grids:
+    app_admin_filters:
+      driver:
+        name: doctrine/orm
+        options:
+          class: PTS\SyliusOrderBatchPlugin\Entity\Filter
+      sorting:
+        filterName: desc
+      fields:
+        filterName:
+          type: string
+          label: app.filters.filterName
+          sortable: filterName
+        numberType:
+          type: string
+          label: app.filters.numberType
+          sortable: ~
+        numberValue:
+          type: string
+          label: app.filters.numberValue
+          sortable: ~
+        customerType:
+          type: string
+          label: app.filters.customerType
+          sortable: ~
+        customerValue:
+          type: string
+          label: app.filters.customerValue
+          sortable: ~
+        dateFrom:
+          type: datetime
+          label: app.filters.dateFrom
+          sortable: ~
+        dateTo:
+          type: datetime
+          label: app.filters.dateTo
+          sortable: ~
+        channel:
+          type: string
+          label: app.filters.channel
+          sortable: ~
+        totalGreaterThan:
+          type: string
+          label: app.filters.totalGreaterThan
+          sortable: ~
+        totalLessThan:
+          type: string
+          label: app.filters.totalLessThan
+          sortable: ~
+        totalCurrency:
+          type: string
+          label: app.filters.totalCurrency
+          sortable: ~
+        shippingCountry:
+          type: string
+          label: app.filters.shippingCountry
+          sortable: ~
+      actions:
+        main:
+          create:
+            type: create
+        item:
+          update:
+            type: update
+          delete:
+            type: delete
+          show:
+            type: show
+    sylius_admin_order:
+      filters:
+        state:
+          type: order_state
+        number:
+          type: custom_string_filter
+        customer:
+          type: custom_string_filter
+        payment_state:
+          type: order_payment_state
+        shipping_state:
+          type: order_shipping_state
+        batch:
+          type: exists_in_array
+        shipping_country:
+          type: order_shipping_country
+    sylius_admin_batches:
+      driver:
+        name: doctrine/orm
+        options:
+          class: PTS\SyliusOrderBatchPlugin\Entity\Batch
+          repository:
+            method: createListQueryBuilder
+      sorting:
+        name: desc
+      fields:
+        name:
+          type: string
+          label: app.filters.filterName
+          sortable: name
+      filters:
+        name:
+          type: custom_string_filter
+      actions:
+        item:
+          delete:
+            type: delete
+          show:
+            type: show
+    app_admin_batch:
+      driver:
+        name: doctrine/orm
+        options:
+          class: "%sylius.model.order.class%"
+          repository:
+            method: createListQueryBuilder
+      sorting:
+        number: desc
+      fields:
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        number:
+          type: twig
+          label: sylius.ui.number
+          path: .
+          sortable: ~
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+        date:
+          type: datetime
+          label: sylius.ui.date
+          path: checkoutCompletedAt
+          sortable: checkoutCompletedAt
+          options:
+            format: d-m-Y H:i:s
+        customer:
+          type: twig
+          label: sylius.ui.customer
+          sortable: customer.lastName
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+        state:
+          type: twig
+          label: sylius.ui.state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/State"
+        paymentState:
+          type: twig
+          label: sylius.ui.payment_state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/PaymentState"
+        shippingState:
+          type: twig
+          label: sylius.ui.shipping_state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/ShippingState"
+        total:
+          type: twig
+          label: sylius.ui.total
+          path: .
+          sortable: total
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
+        currencyCode:
+          type: string
+          label: sylius.ui.currency
+          sortable: ~
+      filters:
+        number:
+          type: string
+          label: sylius.ui.number
+        customer:
+          type: string
+          label: sylius.ui.customer
+          options:
+            fields: [customer.email, customer.firstName, customer.lastName]
+        date:
+          type: date
+          label: sylius.ui.date
+          options:
+            field: checkoutCompletedAt
+            inclusive_to: true
+        channel:
+          type: entity
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+        total:
+          type: money
+          label: sylius.ui.total
+          options:
+            currency_field: currencyCode
+        state:
+          type: order_state
+        payment_state:
+          type: order_payment_state
+        shipping_state:
+          type: order_shipping_state
+        shipping_country:
+          type: order_shipping_country
+        batch:
+          type: exists_in_array
+      actions:
+        item:
+          show:
+            type: show
+          removeOrderFromBatch:
+            type: removeOrderFromBatch
+    app_admin_shipment_batch_show:
+      driver:
+        name: doctrine/orm
+        options:
+          class: "%sylius.model.order.class%"
+          repository:
+            method: createListQueryBuilder
+      sorting:
+        number: desc
+      fields:
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        number:
+          type: twig
+          label: sylius.ui.number
+          path: .
+          sortable: ~
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+        date:
+          type: datetime
+          label: sylius.ui.date
+          path: checkoutCompletedAt
+          sortable: checkoutCompletedAt
+          options:
+            format: d-m-Y H:i:s
+        customer:
+          type: twig
+          label: sylius.ui.customer
+          sortable: customer.lastName
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+        state:
+          type: twig
+          label: sylius.ui.state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/State"
+        paymentState:
+          type: twig
+          label: sylius.ui.payment_state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/PaymentState"
+        shippingState:
+          type: twig
+          label: sylius.ui.shipping_state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/ShippingState"
+        total:
+          type: twig
+          label: sylius.ui.total
+          path: .
+          sortable: total
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
+        currencyCode:
+          type: string
+          label: sylius.ui.currency
+          sortable: ~
+      filters:
+        number:
+          type: string
+          label: sylius.ui.number
+        customer:
+          type: string
+          label: sylius.ui.customer
+          options:
+            fields: [customer.email, customer.firstName, customer.lastName]
+        date:
+          type: date
+          label: sylius.ui.date
+          options:
+            field: checkoutCompletedAt
+            inclusive_to: true
+        channel:
+          type: entity
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+        total:
+          type: money
+          label: sylius.ui.total
+          options:
+            currency_field: currencyCode
+        shipping_country:
+          type: order_shipping_country
+        batch:
+          type: exists_in_array
+      actions:
+        item:
+          show:
+            type: show
+    app_admin_out_of_stock_batch:
+      driver:
+        name: doctrine/orm
+        options:
+          class: "%sylius.model.order.class%"
+          repository:
+            method: createListQueryBuilder
+      sorting:
+        number: desc
+      fields:
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        number:
+          type: twig
+          label: sylius.ui.number
+          path: .
+          sortable: ~
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+        date:
+          type: datetime
+          label: sylius.ui.date
+          path: checkoutCompletedAt
+          sortable: checkoutCompletedAt
+          options:
+            format: d-m-Y H:i:s
+        customer:
+          type: twig
+          label: sylius.ui.customer
+          sortable: customer.lastName
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+        state:
+          type: twig
+          label: sylius.ui.state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/State"
+        paymentState:
+          type: twig
+          label: sylius.ui.payment_state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/PaymentState"
+        shippingState:
+          type: twig
+          label: sylius.ui.shipping_state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/ShippingState"
+        total:
+          type: twig
+          label: sylius.ui.total
+          path: .
+          sortable: total
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
+        currencyCode:
+          type: string
+          label: sylius.ui.currency
+          sortable: ~
+      filters:
+        number:
+          type: string
+          label: sylius.ui.number
+        customer:
+          type: string
+          label: sylius.ui.customer
+          options:
+            fields: [customer.email, customer.firstName, customer.lastName]
+        date:
+          type: date
+          label: sylius.ui.date
+          options:
+            field: checkoutCompletedAt
+            inclusive_to: true
+        channel:
+          type: entity
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+        total:
+          type: money
+          label: sylius.ui.total
+          options:
+            currency_field: currencyCode
+        state:
+          type: order_state
+        batch:
+          type: exists_in_array
+      actions:
+        item:
+          show:
+            type: show
+    app_admin_shipment_batch:
+      driver:
+        name: doctrine/orm
+        options:
+          class: PTS\SyliusOrderBatchPlugin\Entity\Batch
+          repository:
+            method: createShippingBatchListQueryBuilder
+      sorting:
+        name: desc
+      fields:
+        name:
+          type: string
+          label: app.filters.filterName
+          sortable: name
+      filters:
+        name:
+          type: custom_string_filter
+      actions:
+        item:
+          show:
+            type: show
+    app_admin_payment_failed_batch:
+      driver:
+        name: doctrine/orm
+        options:
+          class: "%sylius.model.order.class%"
+          repository:
+            method: createListQueryBuilder
+      sorting:
+        number: desc
+      fields:
+        channel:
+          type: twig
+          label: sylius.ui.channel
+          sortable: channel.code
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
+        number:
+          type: twig
+          label: sylius.ui.number
+          path: .
+          sortable: ~
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
+        date:
+          type: datetime
+          label: sylius.ui.date
+          path: checkoutCompletedAt
+          sortable: checkoutCompletedAt
+          options:
+            format: d-m-Y H:i:s
+        customer:
+          type: twig
+          label: sylius.ui.customer
+          sortable: customer.lastName
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/customer.html.twig"
+        state:
+          type: twig
+          label: sylius.ui.state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/State"
+        paymentState:
+          type: twig
+          label: sylius.ui.payment_state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/PaymentState"
+        shippingState:
+          type: twig
+          label: sylius.ui.shipping_state
+          sortable: ~
+          options:
+            template: "@SyliusUi/Grid/Field/state.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/ShippingState"
+        tags:
+          type: twig
+          label: app.batch.tags
+          sortable: ~
+          options:
+            template: "Admin/Batch/Columns/Tags.html.twig"
+            vars:
+              labels: "@SyliusAdmin/Order/Label/ShippingState"
+        total:
+          type: twig
+          label: sylius.ui.total
+          path: .
+          sortable: total
+          options:
+            template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
+        currencyCode:
+          type: string
+          label: sylius.ui.currency
+          sortable: ~
+      filters:
+        number:
+          type: string
+          label: sylius.ui.number
+        customer:
+          type: string
+          label: sylius.ui.customer
+          options:
+            fields: [customer.email, customer.firstName, customer.lastName]
+        date:
+          type: date
+          label: sylius.ui.date
+          options:
+            field: checkoutCompletedAt
+            inclusive_to: true
+        channel:
+          type: entity
+          label: sylius.ui.channel
+          form_options:
+            class: "%sylius.model.channel.class%"
+        total:
+          type: money
+          label: sylius.ui.total
+          options:
+            currency_field: currencyCode
+        shipping_country:
+          type: order_shipping_country
+        batch:
+          type: exists_in_array
+      actions:
+        item:
+          show:
+            type: show
+  templates:
+    filter:
+      order_state: 'Grid/Filter/order_state.html.twig'
+      custom_string_filter: 'Grid/Filter/custom_string.html.twig'
+      order_payment_state: 'Grid/Filter/order_payment_state.html.twig'
+      order_shipping_state: 'Grid/Filter/order_shipping_state.html.twig'
+      order_shipping_country: 'Grid/Filter/order_shipping_country.html.twig'
+      exists_in_array: 'Grid/Filter/exists_in_array.html.twig'
+    action:
+      removeOrderFromBatch: "Grid/Action/removeOrderFromBatch.html.twig"

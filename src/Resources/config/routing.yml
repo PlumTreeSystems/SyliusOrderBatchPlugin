@@ -1,0 +1,86 @@
+app_admin_batch:
+  resource: |
+    except: ['show']
+    alias: app.batch
+    path: /admin/batch
+    templates: Admin/Batch/Crud
+    permission: true
+    grid: sylius_admin_batches
+    vars:
+        index:
+            subheader: app.batch.subheader
+            icon: archive
+  type: sylius.resource
+
+app_batch_show:
+  path: /admin/batch/{id}
+  methods: [GET, POST, PUT]
+  defaults:
+    _controller: sylius.controller.order:batchAction
+    _sylius:
+      template: Admin/Batch/Batch.html.twig
+      section: admin
+      grid: app_admin_batch
+      permission: true
+      type: sylius.resource
+
+app_shippingBatch_show:
+  path: /admin/shippingBatch/{id}
+  methods: [GET, POST, PUT]
+  defaults:
+    _controller: sylius.controller.order:batchAction
+    _sylius:
+      template: Admin/BatchShipping/Batch.html.twig
+      section: admin
+      grid: app_admin_shipment_batch_show
+      permission: true
+      type: sylius.resource
+
+app_admin_shipping_batch_index:
+  resource: |
+    except: ['show']
+    alias: app.shippingBatch
+    path: /admin/shippingBatch
+    templates: Admin/BatchShipping/Crud
+    permission: true
+    grid: app_admin_shipment_batch
+    vars:
+        index:
+            subheader: app.batch.subheader
+            icon: archive
+  type: sylius.resource
+
+app_admin_filters:
+  resource: |
+    alias: app.filter
+    path: /admin/filters
+    templates: Admin/Filters/Crud
+    permission: true
+    grid: app_admin_filters
+    vars:
+        index:
+            subheader: app.filters.subheader
+            icon: filter
+  type: sylius.resource
+
+app_batch_out_of_stock_show:
+  path: /admin/outOfStockBatch
+  defaults:
+    _controller: sylius.controller.order:batchAction
+    _sylius:
+      template: Admin/Batch/OutOfStockBatch.html.twig
+      section: admin
+      grid: app_admin_out_of_stock_batch
+      permission: true
+      type: sylius.resource
+
+app_batch_payment_failed_show:
+  path: /admin/paymentFailedBatch
+  defaults:
+    _controller: sylius.controller.order:batchAction
+    _sylius:
+      template: Admin/Batch/FailedPaymentBatch.html.twig
+      section: admin
+      grid: app_admin_payment_failed_batch
+      permission: true
+      type: sylius.resource

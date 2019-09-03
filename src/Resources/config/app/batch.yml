@@ -1,0 +1,14 @@
+parameters:
+  batch:
+    outOfStock:
+      name: 'Out of stock orders'
+      single: true
+    paymentFailed:
+      name:  'Order with failed payments'
+      single: true
+    shipment:
+      name:  'Shipping '
+      single: false
+    default:
+      name: ''
+      single: false

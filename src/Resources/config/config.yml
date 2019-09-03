@@ -1,2 +1,4 @@
 imports:
   - { resource: "resources.yaml" }
+  - { resource: "grids/admin.yml" }
+  - { resource: "app/batch.yml" }

@@ -7,3 +7,23 @@ pts_sylius_order_batch:
     filter:
       classes:
         model: PTS\SyliusOrderBatchPlugin\Entity\Filter
+sylius_resource:
+  resources:
+    app.filter:
+      driver: doctrine/orm
+      classes:
+        model: PTS\SyliusOrderBatchPlugin\Entity\Filter
+        repository: PTS\SyliusOrderBatchPlugin\Repository\FilterRepository
+        form: PTS\SyliusOrderBatchPlugin\Form\Type\FilterType
+    app.batch:
+      driver: doctrine/orm
+      classes:
+        model: PTS\SyliusOrderBatchPlugin\Entity\Batch
+        repository: PTS\SyliusOrderBatchPlugin\Repository\BatchRepository
+        form: PTS\SyliusOrderBatchPlugin\Form\Type\BatchType
+    app.shippingBatch:
+      driver: doctrine/orm
+      classes:
+        model: PTS\SyliusOrderBatchPlugin\Entity\Batch
+        repository: PTS\SyliusOrderBatchPlugin\Repository\BatchRepository
+        form: PTS\SyliusOrderBatchPlugin\Form\Type\BatchType

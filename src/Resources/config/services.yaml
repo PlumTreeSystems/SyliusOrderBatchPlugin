@@ -1,0 +1,37 @@
+imports:
+  - { resource: "services/filters.yml" }
+
+services:
+  pts_sylius_order_batch_plugin.batch.manager:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\BatchManager'
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@pts_sylius_order_batch_plugin.form.error.extractor'
+      - '@form.factory'
+      - '@sm.factory'
+      - '@event_dispatcher'
+    public: true
+
+  pts_sylius_order_batch_plugin.form.error.extractor:
+    public: true
+    class: 'PTS\SyliusOrderBatchPlugin\Service\FormErrorExtractor'
+
+  pts_sylius_order_batch_plugin.paginator.manager:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\PaginatorManager'
+    public: true
+
+  pts_sylius_order_batch_plugin.filter.manager:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\FilterManager'
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@form.factory'
+      - '@jms_serializer.serializer'
+      - '@pts_sylius_order_batch_plugin.form.error.extractor'
+    public: true
+
+  pts_sylius_order_batch_plugin.listener.admin.menu_builder:
+    class: 'PTS\SyliusOrderBatchPlugin\Menu\AdminMenuListener'
+    tags:
+      - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
+
+

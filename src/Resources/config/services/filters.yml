@@ -1,0 +1,53 @@
+services:
+  app.grid.filter.order_state:
+    class: PTS\SyliusOrderBatchPlugin\Grid\Filter\OrderStateFilter
+    public: true
+    tags:
+      -
+        name: sylius.grid_filter
+        type: order_state
+        form_type: PTS\SyliusOrderBatchPlugin\Form\Type\Filter\OrderStateFilterType
+  app.grid.filter.order_payment_state:
+    class: PTS\SyliusOrderBatchPlugin\Grid\Filter\OrderPaymentStateFilter
+    public: true
+    tags:
+      -
+        name: sylius.grid_filter
+        type: order_payment_state
+        form_type: PTS\SyliusOrderBatchPlugin\Form\Type\Filter\OrderPaymentStateFilterType
+
+  app.grid.filter.order_shipping_state:
+    class: PTS\SyliusOrderBatchPlugin\Grid\Filter\OrderShippingStateFilter
+    public: true
+    tags:
+      -
+        name: sylius.grid_filter
+        type: order_shipping_state
+        form_type: PTS\SyliusOrderBatchPlugin\Form\Type\Filter\OrderShippingStateFilterType
+
+  app.grid.filter.order_shipping_country:
+    class: PTS\SyliusOrderBatchPlugin\Grid\Filter\OrderShippingCountryFilter
+    public: true
+    tags:
+      -
+        name: sylius.grid_filter
+        type: order_shipping_country
+        form_type: PTS\SyliusOrderBatchPlugin\Form\Type\Filter\OrderShippingCountryFilterType
+
+  app.grid.filter.exists_in_array:
+    class: PTS\SyliusOrderBatchPlugin\Grid\Filter\ExistsInArrayFilter
+    public: true
+    tags:
+      -
+        name: sylius.grid_filter
+        type: exists_in_array
+        form_type: PTS\SyliusOrderBatchPlugin\Form\Type\Filter\ExistsInArrayFilterType
+
+  app.grid.filter.custom_string_filter:
+    class: PTS\SyliusOrderBatchPlugin\Grid\Filter\CustomStringFilter
+    public: true
+    tags:
+      -
+        name: sylius.grid_filter
+        type: custom_string_filter
+        form_type: PTS\SyliusOrderBatchPlugin\Form\Type\Filter\CustomStringFilterType
