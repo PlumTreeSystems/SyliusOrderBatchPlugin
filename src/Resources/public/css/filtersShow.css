@@ -1,0 +1,11 @@
+.filter-grid{
+    display: flex;
+}
+
+.filter-grid > div {
+    padding-left: 25px;
+}
+
+.filters-view {
+    width: 100%;
+}

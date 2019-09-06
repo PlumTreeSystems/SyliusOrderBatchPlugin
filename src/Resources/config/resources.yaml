@@ -27,3 +27,20 @@ sylius_resource:
         model: PTS\SyliusOrderBatchPlugin\Entity\Batch
         repository: PTS\SyliusOrderBatchPlugin\Repository\BatchRepository
         form: PTS\SyliusOrderBatchPlugin\Form\Type\BatchType
+    app.documentTemplate:
+      driver: doctrine/orm
+      classes:
+        model: PTS\SyliusOrderBatchPlugin\Entity\DocumentTemplate
+        repository: PTS\SyliusOrderBatchPlugin\Repository\DocumentTemplateRepository
+    app.document:
+      driver: doctrine/orm
+      classes:
+        model: PTS\SyliusOrderBatchPlugin\Entity\Document
+        repository: PTS\SyliusOrderBatchPlugin\Repository\DocumentRepository
+sylius_order:
+  resources:
+    order:
+      classes:
+        model: Sylius\Component\Core\Model\Order
+        repository: PTS\SyliusOrderBatchPlugin\Repository\OrderRepository
+        controller: PTS\SyliusOrderBatchPlugin\Controller\OrderController

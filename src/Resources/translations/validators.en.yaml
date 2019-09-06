@@ -1,0 +1,9 @@
+app:
+    checkout:
+        gdpr:
+            mustAgree: 'You must agree to the provided terms'
+    promoted_product:
+        position:
+            error: 'Position cannot be empty'
+        product:
+            error: 'You must select a product to promote'

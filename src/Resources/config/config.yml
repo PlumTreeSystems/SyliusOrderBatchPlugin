@@ -2,3 +2,5 @@ imports:
   - { resource: "resources.yaml" }
   - { resource: "grids/admin.yml" }
   - { resource: "app/batch.yml" }
+  - { resource: "app/emails.yml" }
+  - { resource: "app/fixtures/simply_suite.yml" }

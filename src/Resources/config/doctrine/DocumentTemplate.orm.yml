@@ -1,0 +1,31 @@
+PTS\SyliusOrderBatchPlugin\Entity\DocumentTemplate:
+  type: entity
+  table: document_template
+  id:
+    id:
+      type: integer
+      generator:
+        strategy: AUTO
+  manyToOne:
+    locale:
+      targetEntity: Sylius\Component\Locale\Model\Locale
+      nullable: false
+  fields:
+    content:
+      type: text
+      nullable: true
+    style:
+      type: text
+      nullable: true
+    code:
+      type: string
+      nullable: false
+    title:
+      type: string
+      nullable: false
+    lastModified:
+      type: datetime
+      nullable: false
+    templateData:
+      type: text
+      nullable: true

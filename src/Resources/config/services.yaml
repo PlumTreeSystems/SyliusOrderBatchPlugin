@@ -1,5 +1,6 @@
 imports:
   - { resource: "services/filters.yml" }
+  - { resource: "services/fixtures.yml" }
 
 services:
   pts_sylius_order_batch_plugin.batch.manager:
@@ -33,5 +34,30 @@ services:
     class: 'PTS\SyliusOrderBatchPlugin\Menu\AdminMenuListener'
     tags:
       - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
+  pts_sylius_order_batch_plugin.document.manager:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\DocumentsManager'
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@twig'
+      - '%pts_file_provider_settings%'
+      - '@pts_file.manager'
+      - '@jms_serializer.serializer'
+    public: true
+
+  app.file_exporting.manager:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\FilesExportingService'
+    public: true
+  app.document_data.provider:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\DocumentsDataProvider'
+    arguments:
+      - '@app.factory.orders'
+    public: true
+  app.extension.calculate_quantity:
+    class: 'PTS\SyliusOrderBatchPlugin\Extension\OrderItemQuantityExtension'
+    tags:
+      - 'twig.extension'
+  app.form.error.extractor:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\FormErrorExtractor'
+    public: true
 
 

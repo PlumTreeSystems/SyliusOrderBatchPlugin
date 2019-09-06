@@ -1,0 +1,133 @@
+parameters:
+  emailTemplates:
+    -
+      code: invitation_to_become_distributor
+      title: Customer invitation to become distributor
+      params:
+        fullName: 'Full user name'
+        url: 'Registration link'
+    -
+      code: info_before_distributor_invitation
+      title: Informational letter about invitation after a week
+      params:
+        fullName: 'Full user name'
+    -
+      code: order_confirmation
+      title: Order confirmation
+      params:
+        url|raw: 'Change payment method link'
+        order.number: 'Order number'
+      documents:
+        ['orderInvoice', 'otherDocument']
+    -
+      code: shipment_confirmation
+      title: Shipment confirmation
+      params:
+        shipment.method: 'Order shipment method'
+        order.number: 'Order number'
+        shipment.tracking: 'Shipment tracking number'
+    -
+      code: reset_password_token
+      title: Password reset
+      params:
+        user.username: 'Users name'
+        url|raw: 'Password reset link'
+    -
+      code: verification_token
+      title: Email address verification
+      params:
+        url|raw: 'Verification link'
+    -
+      code: user_registration
+      title: User registration
+      params:
+        user.username: 'Users name'
+  emailDocuments:
+    -
+      code: orderInvoice
+      title: Invoice
+      template: '/templates/Documents/InvoiceTemplate.html.twig'
+      fields:
+        - { code: 'logoLabel', label: 'Logotype label', type: 'text'}
+        - { code: 'returnAddress', label: 'Return address', type: 'text'}
+        - { code: 'vatNo', label: 'VAT No', type: 'text'}
+        - { code: 'web', label: 'Web address', type: 'text'}
+        - { code: 'email', label: 'Email address', type: 'text'}
+        - { code: 'tel', label: 'Telephone', type: 'text'}
+        - { code: 'shipToTitle', label: 'Shipping information title', type: 'text'}
+        - { code: 'totalPriceTitle', label: 'Total price title', type: 'text'}
+        - { code: 'shippingPriceTitle', label: 'Shipping price title', type: 'text'}
+        - { code: 'localTaxTitle', label: 'Local tax price title', type: 'text'}
+        - { code: 'vatTitle', label: 'VAT price title', type: 'text'}
+        - { code: 'subTotalTitle', label: 'Subtotal price title', type: 'text'}
+        - { code: 'subTotalTableTitle', label: 'Table "Subtotal" title', type: 'text'}
+        - { code: 'unitPriceTableTitle', label: 'Table "Unit price" title', type: 'text'}
+        - { code: 'descriptionTableTitle', label: 'Table "Description" title', type: 'text'}
+        - { code: 'orderNumberTableTitle', label: 'Table "Order No" title', type: 'text'}
+        - { code: 'quantityTableTitle', label: 'Table "Quantity" title', type: 'text'}
+        - { code: 'customerInfoTelephone', label: 'Customer telephone title', type: 'text'}
+      exampleData:
+        logoLabel: '73 Penhill Rd, Bexley DA5 3EP, UK'
+        returnAddress: 'Return address: 1 Bridges Rd, Stanmore HA7 3LZ, UK'
+        vatNo: 'VAT No 981 6518 64'
+        web: 'Web: www.plumtreesystems.com'
+        email: 'E-Mail: support@plumtreesystems.com'
+        tel: 'Tel: +44(0)23 9187 4913'
+        shipToTitle: 'Ship to'
+        totalPriceTitle: 'Total'
+        shippingPriceTitle: 'Shipping'
+        localTaxTitle: 'Local Tax (es)'
+        vatTitle: 'VAT'
+        subTotalTitle: 'Subtotal'
+        subTotalTableTitle: 'Subtotal'
+        unitPriceTableTitle: 'Unit Price'
+        descriptionTableTitle: 'Description'
+        orderNumberTableTitle: 'Order No'
+        quantityTableTitle: 'Qty'
+        customerInfoTelephone: 'Tel'
+    -
+      code: shippingNote
+      title: Shipping Note
+      template: '/templates/Documents/ShippingNoteTemplate.html.twig'
+      fields:
+        - { code: 'logoLabel', label: 'Logotype label', type: 'text'}
+        - { code: 'returnAddress', label: 'Return address', type: 'text'}
+        - { code: 'vatNo', label: 'VAT No', type: 'text'}
+        - { code: 'web', label: 'Web address', type: 'text'}
+        - { code: 'email', label: 'Email address', type: 'text'}
+        - { code: 'tel', label: 'Telephone', type: 'text'}
+        - { code: 'shipToTitle', label: 'Shipping information title', type: 'text'}
+        - { code: 'totalPriceTitle', label: 'Total price title', type: 'text'}
+        - { code: 'shippingPriceTitle', label: 'Shipping price title', type: 'text'}
+        - { code: 'localTaxTitle', label: 'Local tax price title', type: 'text'}
+        - { code: 'vatTitle', label: 'VAT price title', type: 'text'}
+        - { code: 'subTotalTitle', label: 'Subtotal price title', type: 'text'}
+        - { code: 'subTotalTableTitle', label: 'Table "Subtotal" title', type: 'text'}
+        - { code: 'unitPriceTableTitle', label: 'Table "Unit price" title', type: 'text'}
+        - { code: 'descriptionTableTitle', label: 'Table "Description" title', type: 'text'}
+        - { code: 'orderNumberTableTitle', label: 'Table "Order No" title', type: 'text'}
+        - { code: 'quantityTableTitle', label: 'Table "Quantity" title', type: 'text'}
+        - { code: 'customerInfoTelephone', label: 'Customer telephone title', type: 'text'}
+        - { code: 'title', label: 'Page Title', type: 'text'}
+        - { code: 'totalQuantityTitle', label: 'Total Quantity Title', type: 'text'}
+      exampleData:
+        logoLabel: '73 Penhill Rd, Bexley DA5 3EP, UK'
+        returnAddress: 'Return address: 1 Bridges Rd, Stanmore HA7 3LZ'
+        vatNo: 'VAT No 981 6518 64'
+        web: 'Web: www.plumtreesystems.com'
+        email: 'E-Mail: support@plumtreesystems.com'
+        tel: 'Tel: +44(0)23 9187 4913'
+        shipToTitle: 'Ship to'
+        totalPriceTitle: 'Total'
+        shippingPriceTitle: 'Shipping'
+        localTaxTitle: 'Local Tax (es)'
+        vatTitle: 'VAT'
+        subTotalTitle: 'Subtotal'
+        subTotalTableTitle: 'Subtotal'
+        unitPriceTableTitle: 'Unit Price'
+        descriptionTableTitle: 'Description'
+        orderNumberTableTitle: 'Order No'
+        quantityTableTitle: 'Qty'
+        customerInfoTelephone: 'Tel'
+        title: 'SHIPPING NOTE'
+        totalQuantityTitle: 'Total Quantity'

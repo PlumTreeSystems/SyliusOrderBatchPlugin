@@ -1,0 +1,10 @@
+sylius_admin_order_index:
+  path: /admin/orders
+  defaults:
+    _controller: sylius.controller.order:customFiltersAction
+    _sylius:
+      template: Admin/Order/ordersList.html.twig
+      section: admin
+      grid: sylius_admin_order
+      permission: true
+      type: sylius.resource

@@ -1,0 +1,16 @@
+sylius_fixtures:
+    suites:
+        simply:
+            listeners:
+                orm_purger: ~
+                logger: ~
+
+            fixtures:
+                locale: ~
+                simply_document_template:
+                    options:
+                        templates:
+                            -
+                                code: 'orderInvoice'
+                                title: 'Invoice'
+                                locale: "%locale%"

@@ -137,7 +137,7 @@ class OrderController extends \Sylius\Bundle\CoreBundle\Controller\OrderControll
         $batchRepo = $this->getDoctrine()->getRepository(Batch::class);
 
         /** @var BatchManager $batchManager */
-        $batchManager = $this->get('app.batch.manager');
+        $batchManager = $this->get('pts_sylius_order_batch_plugin.batch.manager');
 
         $config = $this->requestConfigurationFactory->create($this->metadata, $request);
         $grid = $config->getParameters()->get('grid');

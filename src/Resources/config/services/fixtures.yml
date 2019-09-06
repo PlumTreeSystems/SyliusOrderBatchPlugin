@@ -1,0 +1,39 @@
+services:
+  app.fixtures.documentTemplate:
+    class: 'PTS\SyliusOrderBatchPlugin\Fixtures\DocumentTemplateFixture'
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '@app.factory.documentTemplate'
+    tags:
+      - 'sylius_fixtures.fixture'
+
+
+  app.factory.documentTemplate:
+    class: 'PTS\SyliusOrderBatchPlugin\Fixtures\Factory\DocumentTemplateFactory'
+    arguments:
+      - '@sylius.repository.locale'
+      - '@app.document_data.provider'
+      - '%kernel.project_dir%'
+
+  app.factory.orders:
+    class: 'PTS\SyliusOrderBatchPlugin\Fixtures\Factory\OrderFactory'
+    arguments:
+      - '@sylius.order_item_quantity_modifier'
+      - '@sylius.factory.order'
+      - '@sylius.factory.order_item'
+      - '@sylius.factory.address'
+      - '@sylius.factory.customer'
+      - '@sylius.factory.product'
+      - '@sylius.custom_factory.adjustment'
+      - '@sylius.factory.shipment'
+      - '@sylius.custom_factory.payment'
+      - '@sylius.repository.customer'
+      - '@sylius.repository.product'
+      - '@sylius.repository.channel'
+      - '@sylius.repository.channel_pricing'
+      - '@sylius.repository.shipping_method'
+      - '@sylius.repository.product_variant'
+      - '@sylius.repository.payment'
+      - '@sylius.sequential_order_number_generator'
+      - '@sylius.repository.order'
+    public: true
