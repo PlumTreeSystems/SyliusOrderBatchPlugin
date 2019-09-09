@@ -110,7 +110,7 @@ app_admin_document_regenerate:
   path: /admin/documentTemplatesList/{code}/regenerate
   methods: [GET]
   defaults:
-    _controller: App\Controller\DocumentTemplatesController:regenerateAction
+    _controller: PTS\SyliusOrderBatchPlugin\Controller\DocumentTemplatesController:regenerateAction
 
 app_admin_document_template_edit:
   path: /admin/documentTemplatesList/{code}/{localeId}

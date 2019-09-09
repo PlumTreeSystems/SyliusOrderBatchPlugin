@@ -289,7 +289,7 @@ class DocumentsManager
             && sizeof($data['templateData']) > 0) {
             $templateData = $data['templateData'];
         } else {
-            $templateData = json_decode($template->getTemplateData(), true);
+            $templateData = $template->getTemplateData();
         }
 
         $bodyWithFields = $this->renderFieldsToTemplate($body, $templateData);

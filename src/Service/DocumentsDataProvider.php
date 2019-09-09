@@ -14,7 +14,8 @@ class DocumentsDataProvider
         $this->orderFactory = $orderFactory;
     }
 
-    public function getTemplate($template, $projectDir) {
+    public function getTemplate($template, $projectDir)
+    {
         $url = $projectDir . $template['template'];
         $code = file_get_contents($url);
 
@@ -32,11 +33,13 @@ class DocumentsDataProvider
         ];
     }
 
-    public function generateTemplateData($template) {
-        $data = json_encode($template['exampleData'], true);
-        return $data;
+    public function generateTemplateData($template)
+    {
+        return $template['exampleData'];
     }
-    public function getTestOrder() {
+
+    public function getTestOrder()
+    {
         return $this->orderFactory->create();
     }
 }

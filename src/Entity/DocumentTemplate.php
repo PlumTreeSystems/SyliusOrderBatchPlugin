@@ -178,23 +178,26 @@ class DocumentTemplate implements ResourceInterface
     /**
      * Set templateData
      *
-     * @param string $templateData
+     * @param array $templateData
      *
      * @return DocumentTemplate
      */
-    public function setTemplateData($templateData)
+    public function setTemplateData(array $templateData)
     {
-        $this->templateData = $templateData;
+        $this->templateData = json_encode($templateData);
         $this->setLastModified();
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getTemplateData()
     {
-        return $this->templateData;
+        if ($this->templateData) {
+            return json_decode($this->templateData, true);
+        }
+        return [];
     }
 }

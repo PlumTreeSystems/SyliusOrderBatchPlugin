@@ -127,6 +127,9 @@ app:
       error:
         notExists: "Document does't exists"
         dataCorrupted: "Parsing errors have occurred."
+  regenerateDocumentTemplate:
+    title: 'Regenerate modal'
+    label: 'Are you sure you want to regenerate this template?'
   batchShipping:
     title: 'Shipping batches list'
     subTitle: 'Manage all shipments batches'
@@ -254,6 +257,7 @@ app:
   messages:
     success:
       saved: 'Saved successfully!'
+      regenerated: ' has been regenerated successfully!'
     errors:
       canNotDelete: "Can't delete this item!"
       somethingHappened: "Something happened trying to execute action."

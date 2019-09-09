@@ -20,19 +20,9 @@ class DocumentTemplateType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => true,
             ])
-            ->add('templateData', TextareaType::class, [
+            ->add('templateData', UnstructuredType::class, [
                 'required' => true,
             ]);
-
-        $builder->addViewTransformer(new CallbackTransformer(
-            function (DocumentTemplate $entity) {
-                return $entity;
-            },
-            function (DocumentTemplate $entity) {
-                $entity->setTemplateData(json_encode($entity->getTemplateData()));
-                return $entity;
-            }
-        ));
     }
 
     /**

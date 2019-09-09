@@ -15,7 +15,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DocumentTemplatesController extends Controller
 {
-    public function documentTemplateListAction() {
+    public function documentTemplateListAction()
+    {
         $documents = $this->getParameter('emailDocuments');
 
         /** @var DocumentsManager $documentManager */
@@ -77,15 +78,17 @@ class DocumentTemplatesController extends Controller
         ]);
     }
 
-    public function documentTemplateEditAction(Request $request) {
+    public function documentTemplateEditAction(Request $request)
+    {
         $localeCode = $request->attributes->get('localeId');
         $dm = $this->getDoctrine();
-        $localeRepo = $dm->getRepository(Locale::class);
         $session = $this->get('session');
         $translator = $this->get('translator');
 
+        $localeRepo = $dm->getRepository(Locale::class);
         if ($localeCode == '') {
             $localeCode = $this->getParameter('locale');
+            /** @var Locale $locale */
             $locale = $localeRepo->findOneBy(['code' => $localeCode]);
         } else {
             $locale = $localeRepo->find($localeCode);
@@ -95,7 +98,6 @@ class DocumentTemplatesController extends Controller
                 $locale = $localeRepo->findOneBy(['code' => $localeCode]);
             }
         }
-
         $locales = $localeRepo->findAll();
         $documents = $this->getParameter('emailDocuments');
         $documentName = $request->attributes->get('code');
@@ -118,10 +120,8 @@ class DocumentTemplatesController extends Controller
             return new RedirectResponse($this->generateUrl('app_admin_document_template_list'));
         }
 
-        $doc['code'];
-
-        $documentTemplateRepo = $dm->getRepository(DocumentTemplate::class);
-        $documentTemplate = $documentTemplateRepo->findOneBy(['code' => $doc['code'], 'locale' => $locale->getId()]);
+        /** @var DocumentTemplate $documentTemplate */
+        $documentTemplate = $this->getDocumentTemplateByCodeAndLocale($doc['code'], $locale->getCode());
 
         $form = $this->createForm(DocumentTemplateType::class, $documentTemplate, [
             'csrf_protection' => false
@@ -149,13 +149,10 @@ class DocumentTemplatesController extends Controller
             }
         }
 
-        $templateData = json_decode($documentTemplate->getTemplateData(), true);
+        $templateData = $documentTemplate->getTemplateData();
 
         if (is_null($templateData)) {
             $templateData = $doc['exampleData'];
-
-            $session = $this->get('session');
-
             $session->getFlashBag()->add(
                 'error',
                 $translator->trans('app.editDocumentTemplates.messages.error.dataCorrupted')
@@ -173,6 +170,9 @@ class DocumentTemplatesController extends Controller
     }
 
     public function documentPreviewAction(Request $request) {
+
+        $localeCode = $request->attributes->get('localeId');
+
         /** @var DocumentsManager $documentsManager */
         $documentsManager = $this->get('pts_sylius_order_batch_plugin.document.manager');
 
@@ -184,7 +184,12 @@ class DocumentTemplatesController extends Controller
 
         $code = $request->attributes->get('code');
 
-        $data = $request->get('document_template_form');
+        $documentTemplate = $this->getDocumentTemplateByCodeAndLocale($code, $localeCode);
+
+        $data = [
+            'title' => $documentTemplate->getTitle(),
+            'templateData' => $documentTemplate->getTemplateData()
+        ];
 
         if (is_null($data)) {
             $documents = $this->getParameter('emailDocuments');
@@ -203,12 +208,65 @@ class DocumentTemplatesController extends Controller
 
     public function regenerateAction($code)
     {
+        $session = $this->get('session');
         $documentTemplateRepo = $this->getDoctrine()->getRepository(DocumentTemplate::class);
         $documents = $documentTemplateRepo->findBy(['code' => $code]);
+        /** @var DocumentTemplate $document */
         foreach ($documents as $document) {
+            $documentName = $document->getTitle();
             $this->getDoctrine()->getManager()->remove($document);
         }
+        $documentName = $documentName ?? 'Template';
         $this->getDoctrine()->getManager()->flush();
+        $session->getFlashBag()->add(
+            'success',
+            $documentName . $this->get('translator')->trans('app.messages.success.regenerated')
+        );
         return $this->redirectToRoute('app_admin_document_template_list');
+    }
+
+    private function getDocumentTemplateByCodeAndLocale($code, $localeCode)
+    {
+        $dm = $this->getDoctrine();
+        $localeRepo = $dm->getRepository(Locale::class);
+        if ($localeCode == '') {
+            $localeCode = $this->getParameter('locale');
+            $locale = $localeRepo->findOneBy(['code' => $localeCode]);
+        } else {
+            $locale = $localeRepo->find($localeCode);
+
+            if (is_null($locale)) {
+                $localeCode = $this->getParameter('locale');
+                $locale = $localeRepo->findOneBy(['code' => $localeCode]);
+            }
+        }
+
+        $session = $this->get('session');
+        $translator = $this->get('translator');
+
+        $documents = $this->getParameter('emailDocuments');
+
+        $doc = null;
+
+        foreach ($documents as $item ) {
+            if ($item['code'] == $code) {
+                $doc = $item;
+            }
+        }
+
+        if (is_null($doc)) {
+            $session->getFlashBag()->add(
+                'error',
+                $translator->trans('app.editDocumentTemplates.messages.error.notExists')
+
+            );
+
+            return new RedirectResponse($this->generateUrl('app_admin_document_template_list'));
+        }
+
+        $documentTemplateRepo = $dm->getRepository(DocumentTemplate::class);
+        /** @var DocumentTemplate $documentTemplate */
+        $documentTemplate = $documentTemplateRepo->findOneBy(['code' => $code, 'locale' => $locale->getId()]);
+        return $documentTemplate;
     }
 }
