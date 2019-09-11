@@ -140,6 +140,7 @@ app:
     runFailedOrders: 'Attempt to charge again'
     runOutOfStock: 'Run out of stock orders'
     downloadShippingNotes: 'Print Shipping notes'
+    printInvoice: 'Print Invoice'
     tags: 'Tags'
   batchOutOfStock:
     subheader: 'Orders pending for stock'

@@ -14,7 +14,7 @@ use Sylius\Component\Grid\Parameters;
 
 /**
  * Class FilterManager
- * @package App\Service
+ * @package PTS\SyliusOrderBatchPlugin\Service
  *
  * After adding new filter:
  *  - in createFilter function add data from request to response

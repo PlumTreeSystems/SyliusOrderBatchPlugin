@@ -18,9 +18,10 @@ final class PTSSyliusOrderBatchExtension extends AbstractResourceExtension
     {
         $config = $this->processConfiguration($this->getConfiguration([], $container), $config);
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-
+        $loader->load('services.yaml');
+        $customBatchActions = $config['actions'];
+        $container->setParameter('pts_batch_actions', $customBatchActions);
         $this->registerResources('pts_sylius_order_batch_plugin', $config['driver'], $config['resources'], $container);
 
-        $loader->load('services.yaml');
     }
 }

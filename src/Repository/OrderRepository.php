@@ -17,7 +17,6 @@ class OrderRepository extends BaseOrderRepository
         $query = $this->createQueryBuilder('o')
             ->orderBy('o.id', 'ASC')
             ->where('o.id IN (:orders)')
-            ->andWhere('o.state != :parent')
             ->setParameter('orders', $ordersArray);
 
         return $query;

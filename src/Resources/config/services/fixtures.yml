@@ -1,20 +1,4 @@
 services:
-  app.fixtures.documentTemplate:
-    class: 'PTS\SyliusOrderBatchPlugin\Fixtures\DocumentTemplateFixture'
-    arguments:
-      - '@doctrine.orm.entity_manager'
-      - '@app.factory.documentTemplate'
-    tags:
-      - 'sylius_fixtures.fixture'
-
-
-  app.factory.documentTemplate:
-    class: 'PTS\SyliusOrderBatchPlugin\Fixtures\Factory\DocumentTemplateFactory'
-    arguments:
-      - '@sylius.repository.locale'
-      - '@app.document_data.provider'
-      - '%kernel.project_dir%'
-
   app.factory.orders:
     class: 'PTS\SyliusOrderBatchPlugin\Fixtures\Factory\OrderFactory'
     arguments:

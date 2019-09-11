@@ -101,29 +101,7 @@ app_admin_export_orders_to_csv:
   path: /admin/batch/csv/{id}
   defaults:
     _controller: PTS\SyliusOrderBatchPlugin\Controller\FilesController::exportCSVAction
-app_admin_document_template_list:
-  path: /admin/documentTemplatesList/
-  methods: [GET]
+pts_sylius_order_batch_plugin.print_invoice_batch_action:
+  path: /admin/batch/invoice/{id}
   defaults:
-    _controller: PTS\SyliusOrderBatchPlugin\Controller\DocumentTemplatesController:documentTemplateListAction
-app_admin_document_regenerate:
-  path: /admin/documentTemplatesList/{code}/regenerate
-  methods: [GET]
-  defaults:
-    _controller: PTS\SyliusOrderBatchPlugin\Controller\DocumentTemplatesController:regenerateAction
-
-app_admin_document_template_edit:
-  path: /admin/documentTemplatesList/{code}/{localeId}
-  methods: [POST, GET]
-  defaults:
-    _controller: PTS\SyliusOrderBatchPlugin\Controller\DocumentTemplatesController:documentTemplateEditAction
-    code: ''
-    localeId: ''
-
-app_admin_document_preview:
-  path: /admin/documentTemplatesList/{code}/{localeId}/preview
-  methods: [POST, GET]
-  defaults:
-    _controller: PTS\SyliusOrderBatchPlugin\Controller\DocumentTemplatesController:documentPreviewAction
-    code: ''
-    localeId: 'localeId'
+    _controller: sylius.controller.order:printInvoiceAction

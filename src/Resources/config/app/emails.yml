@@ -67,12 +67,12 @@ parameters:
         - { code: 'quantityTableTitle', label: 'Table "Quantity" title', type: 'text'}
         - { code: 'customerInfoTelephone', label: 'Customer telephone title', type: 'text'}
       exampleData:
-        logoLabel: '73 Penhill Rd, Bexley DA5 3EP, UK'
-        returnAddress: 'Return address: 1 Bridges Rd, Stanmore HA7 3LZ, UK'
-        vatNo: 'VAT No 981 6518 64'
+        logoLabel: 'Logo Label'
+        returnAddress: 'Return address: Your address'
+        vatNo: 'VAT No 000 0000 00'
         web: 'Web: www.plumtreesystems.com'
         email: 'E-Mail: support@plumtreesystems.com'
-        tel: 'Tel: +44(0)23 9187 4913'
+        tel: 'Tel: Your phone number'
         shipToTitle: 'Ship to'
         totalPriceTitle: 'Total'
         shippingPriceTitle: 'Shipping'
@@ -111,12 +111,12 @@ parameters:
         - { code: 'title', label: 'Page Title', type: 'text'}
         - { code: 'totalQuantityTitle', label: 'Total Quantity Title', type: 'text'}
       exampleData:
-        logoLabel: '73 Penhill Rd, Bexley DA5 3EP, UK'
-        returnAddress: 'Return address: 1 Bridges Rd, Stanmore HA7 3LZ'
-        vatNo: 'VAT No 981 6518 64'
+        logoLabel: 'Logo Label'
+        returnAddress: 'Return address: Your address'
+        vatNo: 'VAT No 000 0000 00'
         web: 'Web: www.plumtreesystems.com'
         email: 'E-Mail: support@plumtreesystems.com'
-        tel: 'Tel: +44(0)23 9187 4913'
+        tel: 'Tel: Your phone number'
         shipToTitle: 'Ship to'
         totalPriceTitle: 'Total'
         shippingPriceTitle: 'Shipping'

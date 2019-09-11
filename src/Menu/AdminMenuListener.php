@@ -43,17 +43,6 @@ final class AdminMenuListener
             ->setLabelAttribute('icon', 'dolly flatbed')
         ;
 
-        $subMenu = $menu
-            ->addChild('email')
-            ->setLabel('app.ui.templates')
-        ;
-
-        $subMenu
-            ->addChild('documentTemplates', ['route' => 'app_admin_document_template_list'])
-            ->setLabel('app.ui.documentTemplate')
-            ->setLabelAttribute('icon', 'file')
-        ;
-
 
         $subMenu = $menu->getChild('sales');
 

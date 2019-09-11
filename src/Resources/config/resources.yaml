@@ -7,6 +7,10 @@ pts_sylius_order_batch:
     filter:
       classes:
         model: PTS\SyliusOrderBatchPlugin\Entity\Filter
+  actions:
+    print_invoice:
+      label: 'app.batch.printInvoice'
+      route: 'pts_sylius_order_batch_plugin.print_invoice_batch_action'
 sylius_resource:
   resources:
     app.filter:
@@ -27,16 +31,6 @@ sylius_resource:
         model: PTS\SyliusOrderBatchPlugin\Entity\Batch
         repository: PTS\SyliusOrderBatchPlugin\Repository\BatchRepository
         form: PTS\SyliusOrderBatchPlugin\Form\Type\BatchType
-    app.documentTemplate:
-      driver: doctrine/orm
-      classes:
-        model: PTS\SyliusOrderBatchPlugin\Entity\DocumentTemplate
-        repository: PTS\SyliusOrderBatchPlugin\Repository\DocumentTemplateRepository
-    app.document:
-      driver: doctrine/orm
-      classes:
-        model: PTS\SyliusOrderBatchPlugin\Entity\Document
-        repository: PTS\SyliusOrderBatchPlugin\Repository\DocumentRepository
 sylius_order:
   resources:
     order:

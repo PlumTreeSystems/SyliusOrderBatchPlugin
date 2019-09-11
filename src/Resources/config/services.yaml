@@ -34,24 +34,11 @@ services:
     class: 'PTS\SyliusOrderBatchPlugin\Menu\AdminMenuListener'
     tags:
       - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
-  pts_sylius_order_batch_plugin.document.manager:
-    class: 'PTS\SyliusOrderBatchPlugin\Service\DocumentsManager'
-    arguments:
-      - '@doctrine.orm.entity_manager'
-      - '@twig'
-      - '%pts_file_provider_settings%'
-      - '@pts_file.manager'
-      - '@jms_serializer.serializer'
-    public: true
 
   app.file_exporting.manager:
     class: 'PTS\SyliusOrderBatchPlugin\Service\FilesExportingService'
     public: true
-  app.document_data.provider:
-    class: 'PTS\SyliusOrderBatchPlugin\Service\DocumentsDataProvider'
-    arguments:
-      - '@app.factory.orders'
-    public: true
+
   app.extension.calculate_quantity:
     class: 'PTS\SyliusOrderBatchPlugin\Extension\OrderItemQuantityExtension'
     tags:
@@ -59,5 +46,31 @@ services:
   app.form.error.extractor:
     class: 'PTS\SyliusOrderBatchPlugin\Service\FormErrorExtractor'
     public: true
-
+  sylius.resource_controller.resources_resolver.grid_aware:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\Overrides\ResourcesResolver'
+    decorates: sylius.resource_controller.resources_resolver
+    decoration_priority: 256
+    arguments:
+      - '@sylius.resource_controller.resources_resolver.grid_aware.inner'
+      - '@sylius.grid.provider'
+      - '@sylius.grid.resource_view_factory'
+      - '@pts_sylius_order_batch_plugin.filter.manager'
+  sylius.grid.resource_view_factory:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\Overrides\ResourceGridViewFactory'
+    arguments:
+      - '@sylius.grid.data_provider'
+      - '@sylius.resource_controller.parameters_parser'
+      - '@pts_sylius_order_batch_plugin.filter.manager'
+    public: true
+  sylius.grid.filters_applicator:
+    class: 'PTS\SyliusOrderBatchPlugin\Service\Overrides\FiltersApplicator'
+    arguments:
+      - '@sylius.registry.grid_filter'
+      - '@sylius.grid.filters_criteria_resolver'
+    public: true
+  pts_sylius_order_batch_plugin.batch_action:
+    class: 'PTS\SyliusOrderBatchPlugin\Batch\BatchAction'
+    arguments:
+      - '@doctrine.orm.entity_manager'
+    public: true
 

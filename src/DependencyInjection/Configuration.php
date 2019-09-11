@@ -26,8 +26,17 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->addDefaultsIfNotSet()
-            ->children()
-            ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->children()
+                    ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                    ->arrayNode('actions')
+                    ->arrayPrototype()
+                        ->children()
+                            ->scalarNode('route')->isRequired()->end()
+                            ->booleanNode('enabled')->defaultTrue()->end()
+                            ->scalarNode('label')->defaultValue('Label must be defined')->end()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
