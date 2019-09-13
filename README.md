@@ -13,42 +13,11 @@ return [
     PTS\SyliusOrderBatchPlugin\PTSSyliusOrderBatchPlugin::class => ['all' => true],
 ];
 ```
-Copy the bundle's templates from `` to your project templates folder
+Copy the bundle's templates from `src/Resources/templates` to your project `templates/` folder
 
-## Create a batch action
+## Customize
 
-Extend your controller you want your action to be executed in and add your method
-```php
-class OrderController extends Controller
-{
-    /* @param $id
-    // The id of your batch 
-    */
-    public function yourAction($id)
-    {
-        //Implement your own logic here
-    }
-}
-```
+If you'd like to add custom actions or custom types your batches, follow instructions in the following links
 
-Bind your method to a route in your configuration file
-
-```yaml
-your_action_route:
-  path: /admin/batch/your-action/{id}
-  defaults:
-    _controller: sylius.controller.order:yourAction
-
-```
-
-Register your action to your resources.yaml configuration file
-
-```yaml
-pts_sylius_order_batch:
-  actions:
-    your_action:
-      label: 'Your action label'
-      route: 'your_action_route'
-  ```
-
-  
+[Custom batch type](src/Resources/doc/custom-batch-type.md)
+/ [Custom batch action](src/Resources/doc/custom-batch-action.md)

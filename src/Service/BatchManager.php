@@ -232,17 +232,4 @@ class BatchManager
 
         return $batch;
     }
-
-    public function resolveBatchTypeByGrid(string $gridName) {
-        switch ($gridName) {
-            case 'app_admin_out_of_stock_batch':
-                return BatchInterface::OUT_OF_STOCK_TYPE;
-            case 'app_admin_payment_failed_batch':
-                return BatchInterface::FAILED_PAYMENT_TYPE;
-            case 'app_admin_shipment_batch':
-                return BatchInterface::SHIPMENT_TYPE;
-            default:
-                return 'default';
-        }
-    }
 }

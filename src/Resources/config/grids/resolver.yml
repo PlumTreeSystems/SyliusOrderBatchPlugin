@@ -1,0 +1,6 @@
+parameters:
+  grids:
+    app_admin_batch:
+      name: 'default'
+    app_admin_payment_failed_batch:
+      name: 'paymentFailed'

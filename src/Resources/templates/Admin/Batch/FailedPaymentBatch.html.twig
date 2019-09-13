@@ -1,0 +1,52 @@
+{% extends 'SyliusAdminBundle:Crud:index.html.twig' %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
+{% set event_prefix = metadata.applicationName ~ '.admin.' ~ metadata.name ~ '.index' %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ 'app.ui.batch'|trans }}{% endblock %}
+
+{% block content %}
+    {{ sonata_block_render_event(event_prefix ~ '.before_header', {'resources': resources}) }}
+
+    <div class="ui two column stackable grid">
+        <div class="column">
+            <h1 class="ui header">
+                <i class="circular minus circle icon"></i>
+                <div class="content">
+                    "{{ batch.name }}" {{ 'app.batch.titleEnd'|trans }}
+                </div>
+            </h1>
+            <div class="ui breadcrumb">
+                <a href="{{ path('sylius_admin_dashboard') }}" class="section">{{ 'sylius.ui.administration'|trans }}</a>
+                <div class="divider"> / </div>
+                <div class="active section">{{ 'app.batchType.failedPayment'|trans }}</div>
+            </div>
+        </div>
+    </div>
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_header', {'resources': resources}) }}
+
+    {% include 'Admin/Batch/FailedPaymentBatchContent.html.twig' with {'grid': resources } %}
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resources': resources}) }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('bundles/ptssyliusorderbatchplugin/css/adminOrdersList.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    {{ sonata_block_render_event(event_prefix ~ '.stylesheets') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{{ asset('bundles/ptssyliusorderbatchplugin/js/batchList.js') }}"></script>
+    <script src="{{ asset('bundles/ptssyliusorderbatchplugin/js/adminOrdersList.js') }}"></script>
+    {{ sonata_block_render_event(event_prefix ~ '.javascripts') }}
+{% endblock %}

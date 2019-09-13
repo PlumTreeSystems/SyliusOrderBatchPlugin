@@ -1,0 +1,109 @@
+{% macro simple(paginator, options) %}
+    {% if paginator.haveToPaginate() %}
+        {{ pagerfanta(paginator, 'semantic_ui_translated', options|default({})) }}
+    {% endif %}
+{% endmacro %}
+
+{% macro perPage(paginator, paginationLimits) %}
+    <div class="ui simple fluid dropdown item">
+        {% set requestQuery = app.request.query.all %}
+        {% set correctCriteria = [] %}
+
+        {% for key, val in requestQuery.criteria %}
+            {% if key != 'batch' %}
+                {% set correctCriteria = correctCriteria|merge({ (key): val}) %}
+            {% endif %}
+        {% endfor %}
+        {% set requestQuery = requestQuery|merge({ criteria: correctCriteria}) %}
+
+        {{ 'sylius.ui.show'|trans }} {{ paginator.maxPerPage }}
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            {% for limit in paginationLimits if limit != paginator.maxPerPage %}
+                {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(requestQuery)|merge({'limit': limit})) %}
+                <a class="item" href="{{ path }}">{{ limit }}</a>
+            {% endfor %}
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro pages(paginator, paginatorPages, batch) %}
+    {% if paginator.haveToPaginate() %}
+
+        {% set requestQuery = app.request.query.all %}
+        {% set correctCriteria = [] %}
+
+        {% for key, val in requestQuery.criteria %}
+            {% if key != 'batch' %}
+                {% set correctCriteria = correctCriteria|merge({ (key): val}) %}
+            {% endif %}
+        {% endfor %}
+        {% set requestQuery = requestQuery|merge({ criteria: correctCriteria}) %}
+        {% set pathParams = {"id": batch.id}|merge(requestQuery) %}
+
+        <div class="ui stackable fluid pagination menu">
+            {% if paginator.currentPage == 1 %}
+                <div class="item prev disabled">← Previous</div>
+            {% else %}
+                <a class="item prev" href={{ path(app.request.attributes.get('_route'), pathParams|merge({'page': paginator.currentPage - 1})) }}>← Previous</a>
+            {% endif %}
+
+            {% if paginator.currentPage - paginatorPages.previousPages > 1 %}
+                <a class="item" href={{ path(app.request.attributes.get('_route'), pathParams|merge({'page': 1})) }}>
+                    1
+                </a>
+                {% if paginator.currentPage - paginatorPages.previousPages == 3 %}
+                    <a class="item" href={{ path(app.request.attributes.get('_route'), pathParams|merge({'page': 2})) }}>
+                        2
+                    </a>
+                {% elseif paginator.currentPage - paginatorPages.previousPages > 2 %}
+                    <div class="item disabled">…</div>
+                {% endif %}
+            {% endif %}
+
+            {% if paginatorPages.previousPages > 0 %}
+                {% for i in 0..paginatorPages.previousPages - 1 %}
+                    <a
+                        class="item"
+                        href={{ path(app.request.attributes.get('_route'), pathParams|merge({'page': paginator.currentPage + loop.index - paginatorPages.previousPages - 1})) }}
+                    >
+                        {{ paginator.currentPage + loop.index - paginatorPages.previousPages - 1 }}
+                    </a>
+                {% endfor %}
+            {% endif %}
+
+            <div class="item active">{{ paginator.currentPage }}</div>
+
+            {% if paginatorPages.nextPages > 0 %}
+                {% for i in 0..paginatorPages.nextPages - 1 %}
+                    <a
+                        class="item"
+                        href={{ path(app.request.attributes.get('_route'), pathParams|merge({'page': paginator.currentPage + loop.index})) }}
+                    >
+                        {{ paginator.currentPage + loop.index }}
+                    </a>
+                {% endfor %}
+            {% endif %}
+
+            {% if paginator.currentPage + paginatorPages.nextPages < paginatorPages.totalPages %}
+                {% if paginator.currentPage + paginatorPages.nextPages == paginatorPages.totalPages - 2 %}
+                    <a class="item" href={{ path(app.request.attributes.get('_route'), pathParams|merge({'page': paginatorPages.totalPages - 1})) }}>
+                        {{ paginatorPages.totalPages - 1 }}
+                    </a>
+                {% elseif paginator.currentPage + paginatorPages.nextPages < paginatorPages.totalPages - 1 %}
+                    <div class="item disabled">…</div>
+                {% endif %}
+
+                <a class="item" href={{ path(app.request.attributes.get('_route'), pathParams|merge({'page': paginatorPages.totalPages})) }}>
+                    {{ paginatorPages.totalPages }}
+                </a>
+            {% endif %}
+
+            {% if paginator.currentPage == paginatorPages.totalPages %}
+                <div class="item next disabled">Next →</div>
+            {% else %}
+                <a class="item next" href={{ path(app.request.attributes.get('_route'), pathParams|merge({'page': paginator.currentPage + 1})) }} >Next →</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endmacro %}

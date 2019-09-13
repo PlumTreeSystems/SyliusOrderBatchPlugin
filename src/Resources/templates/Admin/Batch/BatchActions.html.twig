@@ -1,0 +1,5 @@
+{% for action in batch_actions %}
+    <a class="item" href="{{ path(action.route , {'id': batch.id}) }}">
+        {{ action.label|trans }}
+    </a>
+{% endfor %}

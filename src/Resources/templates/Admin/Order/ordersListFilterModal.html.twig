@@ -1,0 +1,22 @@
+<div class="ui small basic modal" id="save-filter-modal">
+    <div class="ui icon header">
+        <i class="save icon"></i>
+        {{ 'app.saveFilterModal.title'|trans }}
+    </div>
+    <div class="content">
+        <div class="ui form">
+            <label for="modalFilterName">{{ 'app.saveFilterModal.label'|trans }}</label>
+            <input id="modalFilterName" type="text" name="modalFilterName"/>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            {{ 'app.modal.cancelButton'|trans }}
+        </button>
+        <button class="ui green ok inverted button" id="confirmation-button">
+            <i class="checkmark icon"></i>
+            {{ 'app.modal.saveButton'|trans }}
+        </button>
+    </div>
+</div>

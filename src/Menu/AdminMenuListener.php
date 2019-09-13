@@ -25,24 +25,6 @@ final class AdminMenuListener
             ->setLabelAttribute('icon', 'archive')
         ;
 
-        $subMenu
-            ->addChild('failedPaymentBatch', ['route' => 'app_batch_payment_failed_show'])
-            ->setLabel('app.batchType.failedPayment')
-            ->setLabelAttribute('icon', 'minus circle')
-        ;
-
-        $subMenu
-            ->addChild('outOfStockBatch', ['route' => 'app_batch_out_of_stock_show'])
-            ->setLabel('app.batchType.outOfStock')
-            ->setLabelAttribute('icon', 'cart arrow down')
-        ;
-
-        $subMenu
-            ->addChild('shippingBatch', ['route' => 'app_shippingBatch_index'])
-            ->setLabel('app.batchType.shipping')
-            ->setLabelAttribute('icon', 'dolly flatbed')
-        ;
-
 
         $subMenu = $menu->getChild('sales');
 

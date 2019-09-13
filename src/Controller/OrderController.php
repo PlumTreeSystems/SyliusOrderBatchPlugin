@@ -3,7 +3,6 @@
 
 namespace PTS\SyliusOrderBatchPlugin\Controller;
 
-use Doctrine\ORM\EntityManager;
 use PTS\SyliusOrderBatchPlugin\Repository\BatchRepository;
 use PTS\SyliusOrderBatchPlugin\Repository\FilterRepository;
 use FOS\RestBundle\View\View;
@@ -143,7 +142,7 @@ class OrderController extends \Sylius\Bundle\CoreBundle\Controller\OrderControll
         $config = $this->requestConfigurationFactory->create($this->metadata, $request);
         $grid = $config->getParameters()->get('grid');
 
-        $type = $batchManager->resolveBatchTypeByGrid($grid);
+        $type = $this->resolveBatchTypeByGrid($grid);
         $batchParams = $this->container->getParameter('batch')[$type];
 
         if (!is_null($id)) {
@@ -285,7 +284,12 @@ class OrderController extends \Sylius\Bundle\CoreBundle\Controller\OrderControll
     {
         $batchRepo = $this->getDoctrine()->getRepository(Batch::class);
         $batch = $batchRepo->find($id);
-        var_dump($batch);
-
+    }
+    public function resolveBatchTypeByGrid(string $gridName) {
+        $parameters = $this->getParameter('grids');
+        if (key_exists($gridName, $parameters)) {
+            return $parameters[$gridName]['name'];
+        }
+        throw new \InvalidArgumentException('This grid name cannot be resolved, you must register it to your parameters');
     }
 }
