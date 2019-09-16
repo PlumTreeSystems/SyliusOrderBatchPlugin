@@ -1,10 +1,10 @@
-# Sylius Order Batch Plugin 
+# Sylius Order Batch Plugin [![Build Status](https://travis-ci.org/PlumTreeSystems/SyliusOrderBatchPlugin.svg?branch=master)](https://travis-ci.org/PlumTreeSystems/SyliusOrderBatchPlugin)
 
 A plugin that lets you customize how you filter your orders and save them into batches.
 
 ## Installation
 
-Run `composer require plumtreesystems/sylius-order-batch`
+Install the package with this command: `composer require plumtreesystems/sylius-order-batch`
 
 Add plugin dependencies to your bundles.php file:
 
@@ -29,6 +29,8 @@ pts_sylius_order_batch_plugin:
 ```
 
 Copy the bundle's templates from `src/Resources/templates` to your project `templates/` folder
+
+Install the assets of the bundle by executing this command: `php bin/console assets:install public`
 
 ## Customize
 
