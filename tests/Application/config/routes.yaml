@@ -1,0 +1,2 @@
+pts_sylius_order_batch_plugin:
+  resource: "@PTSSyliusOrderBatchPlugin/Resources/config/routing.yml"
