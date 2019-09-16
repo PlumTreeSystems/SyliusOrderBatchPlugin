@@ -20,10 +20,11 @@ Feature: batch must contain all order functionality except batch creation which 
     And I fill in "Username" with "admin@sylius.com"
     And I fill in "Password" with "123456789"
     And I press "Login"
+    And I wait for confirmation
 
   @ui @mink:chrome
   Scenario: Create batch, adds more orders and check if it contains correct orders.
-    When I go to "/admin/orders"
+    When I follow "Orders"
     Then I should see "Filter"
     When I search for a "Number contains 10" filter
     And I select first option from autocomplete
@@ -31,10 +32,9 @@ Feature: batch must contain all order functionality except batch creation which 
     Then I should not see "000123"
     And I should see "000102"
     And I should not see "000023"
+    And I wait for a second
     When I press "Save batch"
-    And I capture a screenshot
     And I fill in "Batch name" with "New batch 123"
-    And I capture a screenshot
     And I press save in new batch modal
     Then I should see "New batch 123"
     And I should not see "000123"
@@ -60,7 +60,7 @@ Feature: batch must contain all order functionality except batch creation which 
     And I should see "000102"
     And I should see "000023"
 
-  @ui @mink:chrome
+  @ui @mink:chrome @noname
   Scenario: Try to create batch without name
     When I follow "Orders"
     Then I should see "Filter"

@@ -1,0 +1,97 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% block title %}{{ parent() }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link rel="stylesheet" href="{{ asset('ptsAssets/filtersShow.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="ui header">
+        <i class="circular filter icon"></i>
+        <div class="content">
+            "{{ resource.filterName }}" {{ 'app.filtersShow.title'|trans }}
+        </div>
+    </h1>
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_admin_dashboard') }}" class="section">{{ 'sylius.ui.administration'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('app_filter_index') }}" class="section">{{ 'app.filtersShow.linkTitle'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ resource.filterName }}</div>
+    </div>
+    <div class="ui medium list filters-view">
+        <div class="ui medium list">
+            <div class="ui segment">
+                <table class="ui sortable stackable celled table">
+                    <thead>
+                        <tr>
+                            <th  class="sylius-table-column-channel">Name</th>
+                            <th  class="sylius-table-column-channel">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.number'|trans }} {{ 'app.filtersShow.type'|trans }}</td>
+                            <td>{% if resource.numberType != null%}{{ resource.numberType }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.number'|trans }} {{ 'app.filtersShow.value'|trans }}</td>
+                            <td>{% if resource.numberValue != null%}{{ resource.numberValue }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.customer'|trans }} {{ 'app.filtersShow.type'|trans }}</td>
+                            <td>{% if resource.customerType != null%}{{ resource.customerType }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.customer'|trans }} {{ 'app.filtersShow.value'|trans }}</td>
+                            <td>{% if resource.customerValue != null%}{{ resource.customerValue }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.channel'|trans }} {{ 'app.filtersShow.value'|trans }}</td>
+                            <td>{% if resource.channel != null%}{{ resource.channel }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.date'|trans }} {{ 'app.filtersShow.dateFrom'|trans }}</td>
+                            <td>{% if resource.dateFrom != null %}{{ resource.dateFrom|date('Y-m-d H:i') }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.date'|trans }} {{ 'app.filtersShow.dateTo'|trans }}</td>
+                            <td>{% if resource.dateTo != null %}{{ resource.dateTo|date('Y-m-d H:i') }} {% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.total'|trans }} {{ 'app.filtersShow.totalGreaterThan'|trans }}</td>
+                            <td>{% if resource.totalGreaterThan != null %}{{ resource.totalGreaterThan }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.total'|trans }} {{ 'app.filtersShow.totalLessThan'|trans }}</td>
+                            <td>{% if resource.totalLessThan != null %}{{ resource.totalLessThan }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.total'|trans }} {{ 'app.filtersShow.totalCurrency'|trans }}</td>
+                            <td>{% if resource.totalCurrency != null %}{{ resource.totalCurrency }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.orderState'|trans }}</td>
+                            <td>{% if resource.orderState != null %}{{ resource.orderState }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.paymentState'|trans }}</td>
+                            <td>{% if resource.paymentState != null %}{{ resource.paymentState }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.shippingState'|trans }}</td>
+                            <td>{% if resource.shippingState != null %}{{ resource.shippingState }}{% else %} - {% endif %}</td>
+                        </tr>
+                        <tr class="item">
+                            <td>{{ 'app.filtersShow.shippingCountry'|trans }}</td>
+                            <td>{% if resource.shippingCountry != null %}{{ resource.shippingCountry }}{% else %} - {% endif %}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

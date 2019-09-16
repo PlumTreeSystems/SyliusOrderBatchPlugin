@@ -1,0 +1,22 @@
+<div class="ui small basic modal" id="save-batch-modal" data-batch-filter-url="{{ path('app_admin_batch_names') }}">
+    <div class="ui icon header">
+        <i class="save icon"></i>
+        {{ 'app.newBatchModal.title'|trans }}
+    </div>
+    <div class="content">
+        <div class="ui form">
+            <label for="modalBatchName">{{ 'app.newBatchModal.label'|trans }}</label>
+            <input id="modalBatchName" type="text" name="modalBatchName"/>
+        </div>
+    </div>
+    <div class="actions">
+        <button class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            {{ 'app.modal.cancelButton'|trans }}
+        </button>
+        <button class="ui green ok inverted button" id="confirmation-new-batch-button">
+            <i class="checkmark icon"></i>
+            {{ 'app.modal.saveButton'|trans }}
+        </button>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+{% extends 'SyliusAdminBundle:Crud:index.html.twig' %}
+
+{% block content %}
+    {{ sonata_block_render_event(event_prefix ~ '.before_header', {'resources': resources}) }}
+
+    <div class="ui two column stackable grid">
+        <div class="column">
+            <h1 class="ui header">
+                <i class="circular dolly flatbed icon"></i>
+                <div class="content">
+                    {{ 'app.batchShipping.title'|trans }}
+                    <div class="sub header">{{ 'app.batchShipping.subTitle'|trans }}</div>
+                </div>
+            </h1>
+            <div class="ui breadcrumb">
+                <a href="{{ path('sylius_admin_dashboard') }}" class="section">{{ 'sylius.ui.administration'|trans }}</a>
+                <div class="divider"> / </div>
+                <div class="active section">{{ 'app.batchShipping.title'|trans }}</div>
+            </div>
+        </div>
+    </div>
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_header', {'resources': resources}) }}
+
+    {% include '@SyliusAdmin/Crud/Index/_content.html.twig' %}
+
+    {{ sonata_block_render_event(event_prefix ~ '.after_content', {'resources': resources}) }}
+{% endblock %}

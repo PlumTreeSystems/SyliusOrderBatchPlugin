@@ -1,0 +1,21 @@
+<div class="ui small basic modal" id="checkShippedModal">
+    <div class="ui icon header">
+        <i class="check circle icon"></i>
+        {{ 'app.batchMoveToShippedModal.title'|trans }}
+    </div>
+    <div class="content">
+        <div class="ui" style="text-align: center;">
+            <span>{{ 'app.batchMoveToShippedModal.label'|trans }}</span>
+        </div>
+    </div>
+    <div class="actions" style="text-align: center;">
+        <button class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            {{ 'app.modal.cancelButton'|trans }}
+        </button>
+        <button class="ui green ok inverted button" id="confirmationCheckShippedModal">
+            <i class="checkmark icon"></i>
+            {{ 'app.modal.proceed'|trans }}
+        </button>
+    </div>
+</div>

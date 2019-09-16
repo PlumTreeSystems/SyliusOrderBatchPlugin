@@ -1,0 +1,21 @@
+<div class="ui small basic modal" id="removeOrderModal">
+    <div class="ui icon header">
+        <i class="trash alternate icon"></i>
+        {{ 'app.batchRemoveOrderModal.title'|trans }}
+    </div>
+    <div class="content">
+        <div class="ui" style="text-align: center;">
+            <span>{{ 'app.batchRemoveOrderModal.label'|trans }}</span>
+        </div>
+    </div>
+    <div class="actions" style="text-align: center;">
+        <button class="ui red basic cancel inverted button">
+            <i class="remove icon"></i>
+            {{ 'app.modal.cancelButton'|trans }}
+        </button>
+        <a class="ui green ok inverted button" id="removeOrderModalAgree">
+            <i class="checkmark icon"></i>
+            {{ 'app.modal.proceed'|trans }}
+        </a>
+    </div>
+</div>

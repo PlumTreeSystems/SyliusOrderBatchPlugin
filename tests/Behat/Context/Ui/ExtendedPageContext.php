@@ -85,14 +85,6 @@ class ExtendedPageContext extends MinkContext implements Context
     }
 
     /**
-     * @When /^I capture a screenshot$/
-     */
-    public function captureScreenshot()
-    {
-        file_put_contents('/var/www/html/etc/build/special-'.md5(microtime()).'.png', $this->getSession()->getDriver()->getScreenshot());
-    }
-
-    /**
      * @When /^(?:|I )remove filter$/
      */
     public function removeFilter()

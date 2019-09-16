@@ -1,0 +1,23 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% from _self import link %}
+{% set parameters = grid.parameters.all() %}
+{% set correctCriteria = [] %}
+
+{% for key, val in parameters.criteria %}
+    {% if key != 'batch' %}
+        {% set correctCriteria = correctCriteria|merge({ (key): val}) %}
+    {% endif %}
+{% endfor %}
+
+{% set criteria = { criteria: correctCriteria} %}
+
+<button class="ui red labeled icon button" name="removeButton" data-url="{{ link(app.request.attributes, criteria, data.id) }}">
+    <i class="icon trash"></i>{{ 'app.buttons.remove'|trans }}
+</button>
+
+{% macro link(attributes, parameters, orderId) %}
+    {% set params = attributes.get('_route_params')|merge(parameters)|merge({_orderRemove: orderId, _action: "removeOrder"}) %}
+
+    {{ path(attributes.get('_route'), params|merge({'page': 1})) }}
+{% endmacro %}

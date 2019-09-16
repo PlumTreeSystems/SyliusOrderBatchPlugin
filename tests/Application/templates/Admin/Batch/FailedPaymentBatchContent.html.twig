@@ -1,0 +1,151 @@
+{% import 'Admin/Batch/Macros/pagination.html.twig' as pagination %}
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% import 'Admin/Batch/Macros/table.html.twig' as table %}
+
+{% set definition = grid.definition %}
+{% set data = grid.data %}
+
+{% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+{% if definition.enabledFilters|length > 0 %}
+    <div class="ui hidden divider"></div>
+    <div class="ui styled fluid accordion">
+        <div class="title active">
+            <i class="dropdown icon"></i>
+            {{ 'sylius.ui.filters'|trans }}
+        </div>
+        <div class="content active">
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                {{ flashMessage }}
+            {% endfor %}
+            <form id="filtersForm" method="get" action="{{ path }}" class="ui loadable form">
+                <div class="two fields">
+                    {% for filter in definition.enabledFilters|sort_by('position') if filter.enabled %}
+                        {{ sylius_grid_render_filter(grid, filter) }}
+
+                        {% if loop.index0 % 2 %}
+                            </div>
+                            <div class="two fields">
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="filters-container">
+                    <div class="ui form">
+                        <label for="filtersSearch">{{ 'app.salesFilters.search'|trans }}</label>
+                        <input id="filtersSearch"/>
+                    </div>
+                    {% for filterItem in filters %}
+                        <div class="filter-tag">
+                            <label for="filter{{ filterItem.id }}" class="ui blue labeled icon button">
+                                <i class="icon remove"></i> {{ filterItem.filterName }}
+                            </label>
+                            <input type="hidden" id="filter{{ filterItem.id }}" name="filter[]" value="{{ filterItem.id }}">
+                        </div>
+                    {% endfor %}
+                </div>
+                <br />
+                {{ buttons.filter() }}
+                <input type="hidden" name="_filterName" value=''>
+                <input type="submit" name="filterButton" id="filterSubmit" style="display: none"/>
+                <button class="ui blue labeled icon button" id="saveFilterButton" data-filter-url="{{ path('app_admin_filters_names') }}">
+                    <i class="save icon"></i>
+                    {{ 'app.salesFilters.saveFilterButton'|trans }}
+                </button>
+                {{ buttons.resetFilters(path) }}
+                <input id="runFailedPaymentButton" name="_action" type="submit" style="display: none" value="runFailedPayment"/>
+                <input id="downloadShippingNotes" name="_action" type="submit" style="display: none" value="downloadShippingNotes"/>
+                {% include 'Admin/Order/ordersListFilterModal.html.twig' %}
+                {% include 'Admin/Batch/BatchListRemoveOrderModal.html.twig' %}
+                {% include 'Admin/Batch/RunFailedPaymentsModal.html.twig' %}
+            </form>
+        </div>
+    </div>
+{% endif %}
+
+{% if data|length > 0 and definition.actionGroups.bulk is defined %}
+    <div class="ui hidden divider"></div>
+    <div class="ui styled fluid accordion">
+        <div class="title active">
+            <i class="dropdown icon"></i>
+            {{ 'sylius.ui.bulk_actions'|trans }}
+        </div>
+        <div class="content active">
+            {% for action in definition.getEnabledActions('bulk') %}
+                {{ sylius_grid_render_bulk_action(grid, action, null) }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% include 'Admin/Batch/BatchListMarkShippedModal.html.twig' %}
+
+<div class="ui segment overflow-x-auto">
+    <div class="ui two column fluid stackable grid">
+        <div class="three wide column">
+            <div class="ui fluid one item menu sylius-paginate">
+                <div
+                    class="ui simple fluid dropdown item"
+                    tabindex="0"
+                    style="
+                        background: #2185d0;
+                        color: #fff;
+                        border-radius: .28571429rem;
+                        font-size: 1rem;
+                        font-weight: 700;
+                    "
+                >
+                    {{ 'app.buttons.operations'|trans }}
+
+                    <i class="dropdown icon" tabindex="0"><div class="menu" tabindex="-1"></div></i>
+                    <div class="menu transition visible" tabindex="-1">
+                        <label class="item" id="runFailedPaymentLabel">
+                            {{ 'app.batch.runFailedOrders'|trans }}
+                        </label>
+                        <label class="item" id="downloadShippingNoteLabel">
+                            {{ 'app.batch.downloadShippingNotes'|trans }}
+                        </label>
+                        <a
+                                href="{{ path('app_admin_export_orders_to_csv', {'id': batch.id}) }}"
+                                class="item"
+                        >
+                            {{ 'app.fileDownloadButtons.csv'|trans }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="thirteen wide column"></div>
+    </div>
+    {% if definition.limits|length > 1 and data|length > min(definition.limits) %}
+        <div class="ui two column fluid stackable grid">
+            <div class="fourteen wide column">
+                {{ pagination.pages(data, paginatorPages, batch) }}
+            </div>
+            <div class="two wide column">
+                <div class="ui fluid one item menu sylius-paginate">
+                    {{ pagination.perPage(data, definition.limits) }}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {{ pagination.pages(data, paginatorPages, batch) }}
+    {% endif %}
+    {% if data|length > 0 %}
+        <table class="ui sortable stackable celled table">
+            <thead>
+            <tr>
+                {{ table.headers(grid, definition, app.request.attributes) }}
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in data %}
+                {{ table.row(grid, definition, row) }}
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display') }}
+    {% endif %}
+
+    {{ pagination.pages(data, paginatorPages, batch) }}
+</div>

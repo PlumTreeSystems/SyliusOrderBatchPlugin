@@ -1,0 +1,31 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% from _self import link %}
+{% set parameters = grid.parameters.all() %}
+{% set correctCriteria = [] %}
+
+{#{% for key, val in parameters.criteria %}#}
+    {#{% if key != 'batch' %}#}
+        {#{% set correctCriteria = correctCriteria|merge({ (key): val}) %}#}
+    {#{% endif %}#}
+{#{% endfor %}#}
+
+{% set criteria = { criteria: correctCriteria} %}
+
+    {% if data.enabled == true %}
+        <button class="ui labeled red icon button" name="disableAutoshipButton" data-url="{{ link(app.request.attributes, criteria, data.id, "disableAutoship") }}">
+            <i class="icon remove"></i>
+            {{ 'app.buttons.disable'|trans }}
+        </button>
+    {% else %}
+        <button class="ui labeled teal icon button" name="enableAutoshipButton" data-url="{{ link(app.request.attributes, criteria, data.id, "enableAutoship") }}">
+            <i class="icon checkmark"></i>
+            {{ 'app.buttons.enable'|trans }}
+        </button>
+    {% endif %}
+
+{% macro link(attributes, parameters, autoshipId, actionName) %}
+    {% set params = attributes.get('_route_params')|merge(parameters)|merge({_disableId: autoshipId, _action: actionName}) %}
+
+    {{ path(attributes.get('_route'), params|merge({'page': 1})) }}
+{% endmacro %}
