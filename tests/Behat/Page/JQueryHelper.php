@@ -11,7 +11,7 @@ abstract class JQueryHelper
      */
     public static function waitForAsynchronousActionsToFinish(Session $session)
     {
-        $session->wait(50000, '0 === jQuery.active');
+        $session->wait(50000, "typeof jQuery != 'undefined' && 0 === jQuery.active");
     }
 
     /**

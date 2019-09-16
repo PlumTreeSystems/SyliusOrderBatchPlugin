@@ -245,6 +245,14 @@ class ExtendedPageContext extends MinkContext implements Context
 
     }
 
+    public function clickLink($link)
+    {
+        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
+            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
+        }
+        parent::clickLink($link);
+    }
+
     /**
      * @When /^(?:|I )follow "(?P<link>(?:[^"]|\\")*)" inside the checkout box$/
      * @param $link
