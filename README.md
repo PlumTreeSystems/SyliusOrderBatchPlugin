@@ -28,6 +28,8 @@ pts_sylius_order_batch_plugin:
   resource: "@PTSSyliusOrderBatchPlugin/Resources/config/routing.yml"
 ```
 
+Execute migrations `php bin/console doctrine:migrations:migrate`
+
 Copy the bundle's templates from `src/Resources/templates` to your project `templates/` folder
 
 Install the assets of the bundle by executing this command: `php bin/console assets:install public`
