@@ -245,12 +245,6 @@ class ExtendedPageContext extends MinkContext implements Context
 
     }
 
-    public function clickLink($link)
-    {
-        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-        parent::clickLink($link);
-    }
-
     /**
      * @When /^(?:|I )follow "(?P<link>(?:[^"]|\\")*)" inside the checkout box$/
      * @param $link
