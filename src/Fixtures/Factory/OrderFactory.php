@@ -114,11 +114,6 @@ class OrderFactory
     private $orderNumberGenerator;
 
     /**
-     * @var AutoshipRepository
-     */
-    private $autoshipRepository;
-
-    /**
      * @var RepositoryInterface
      */
     private $orderRepository;

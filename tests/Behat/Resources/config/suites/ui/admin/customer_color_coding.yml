@@ -1,0 +1,47 @@
+default:
+  suites:
+    ui_customer_color_coding:
+      contexts_services:
+      - app.behat.context.hook.doctrine_orm
+      - sylius.behat.context.hook.email_spool
+
+      - sylius.behat.context.transform.address
+      - sylius.behat.context.transform.channel
+      - sylius.behat.context.transform.order
+      - sylius.behat.context.transform.zone
+      - sylius.behat.context.transform.customer_group
+      - sylius.behat.context.transform.order
+      - sylius.behat.context.transform.country
+      - sylius.behat.context.transform.lexical
+      - sylius.behat.context.transform.product
+      - sylius.behat.context.transform.shared_storage
+      - sylius.behat.context.transform.user
+      - sylius.behat.context.transform.customer
+
+      - sylius.behat.context.setup.address
+      - sylius.behat.context.setup.customer_group
+      - sylius.behat.context.setup.geographical
+      - sylius.behat.context.setup.shop_security
+      - sylius.behat.context.setup.zone
+      - sylius.behat.context.setup.order
+      - sylius.behat.context.setup.product
+      - sylius.behat.context.setup.customer
+      - sylius.behat.context.setup.user
+      - app.behat.context.setup.channel_context
+      - app.behat.context.setup.product
+      - app.behat.context.setup.passing_currency_amount
+      - app.behat.context.setup.order
+      - app.behat.context.setup.email_template
+      - sylius.behat.context.setup.admin_security
+
+      - sylius.behat.context.ui.channel
+      - sylius.behat.context.ui.email
+      - sylius.behat.context.ui.admin.managing_customers
+      - sylius.behat.context.ui.admin.dashboard
+      - app.behat.context.ui.shop.referral
+      - app.behat.context.ui.extended.page
+      - app.behat.context.ui.email
+      - app.behat.context.ui.invite
+
+      filters:
+        tags: "@customer_color_coding && @simply && @ui && @simply_simple"

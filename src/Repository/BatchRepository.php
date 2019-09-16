@@ -50,14 +50,6 @@ class BatchRepository extends EntityRepository
             ;
     }
 
-    public function createShippingBatchListQueryBuilder(): QueryBuilder
-    {
-        return $this->createQueryBuilder('b')
-            ->where('b.type = :type')
-            ->setParameter('type', BatchInterface::SHIPMENT_TYPE)
-            ;
-    }
-
     /**
      * @param $type
      * @return mixed

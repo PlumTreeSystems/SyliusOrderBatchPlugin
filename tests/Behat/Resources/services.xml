@@ -4,6 +4,92 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <defaults public="true"/>
-        <!-- Put your Behat services here -->
+
+        <service id="app.behat.context.setup.product"
+                 class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Setup\AppProductContext">
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="sylius.repository.product"/>
+            <argument type="service" id="sylius.factory.product"/>
+            <argument type="service" id="sylius.product_variant_resolver.default"/>
+            <argument type="service" id="sylius.generator.slug"/>
+            <argument type="service" id="sylius.repository.channel"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="sylius.factory.product_variant"/>
+            <tag name="fob.context_service"/>
+        </service>
+
+
+        <service id="app.behat.context.setup.order"
+                 class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Setup\AppOrderContext">
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="sylius.repository.order"/>
+            <argument type="service" id="sylius.factory.order"/>
+            <argument type="service" id="sylius.factory.order_item"/>
+            <argument type="service" id="sylius.order_item_quantity_modifier"/>
+            <argument type="service" id="sylius.factory.payment"/>
+            <argument type="service" id="sylius.factory.shipment"/>
+            <argument type="service" id="sylius.factory.adjustment"/>
+            <argument type="service" id="sylius.repository.payment_method"/>
+            <argument type="service" id="sylius.repository.shipping_method"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="sylius.repository.product_variant"/>
+            <argument type="service" id="sylius.order_item_quantity_modifier"/>
+            <tag name="fob.context_service"/>
+        </service>
+
+        <service id="app.behat.context.setup.batch"
+                 class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Setup\BatchContext">
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="sylius.repository.locale"/>
+            <tag name="fob.context_service"/>
+        </service>
+
+        <service id="app.behat.context.ui.shop.referral"
+                 class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Setup\ReferralContext">
+            <argument type="service" id="sylius.behat.page.shop.account.dashboard"/>
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="router"/>
+            <argument type="service" id="sylius.factory.admin_user"/>
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service" id="sylius.repository.customer_group"/>
+            <argument type="service" id="sylius.factory.customer"/>
+            <argument type="service" id="sylius.factory.shop_user"/>
+            <argument type="service" id="sylius.behat.page.shop.contact"/>
+            <tag name="fob.context_service"/>
+        </service>
+
+
+        <service id="app.behat.context.setup.order_filters"
+                 class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Ui\OrderFilterContext">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <tag name="fob.context_service"/>
+        </service>
+
+        <defaults public="true"/>
+        <service id="app.behat.context.hook.doctrine_orm"
+                 class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Hook\DoctrineORMContext">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <tag name="fob.context_service"/>
+        </service>
+
+        <service id="app.behat.context.setup.channel_context" class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Setup\ChannelContext">
+            <argument type="service" id="sylius.behat.shared_storage"/>
+            <argument type="service" id="sylius.behat.factory.default_channel"/>
+            <argument type="service" id="sylius.factory.country"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="sylius.custom_factory.zone"/>
+            <tag name="fob.context_service"/>
+        </service>
+
+        <service id="app.behat.context.ui.extended.page" class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Ui\ExtendedPageContext">
+            <tag name="fob.context_service" />
+        </service>
+
+        <service id="app.behat.context.ui.shop.distributor" class="Tests\PTS\SyliusOrderBatchPlugin\Behat\Context\Ui\Shop\DistributorChannelContext">
+            <argument type="service" id="sylius.behat.page.shop.home" />
+            <tag name="fob.context_service" />
+        </service>
+
     </services>
 </container>

@@ -2,6 +2,7 @@
 
 namespace PTS\SyliusOrderBatchPlugin\Repository;
 
+use App\Interfaces\OrderStateInterface;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 
 class OrderRepository extends BaseOrderRepository
@@ -20,5 +21,20 @@ class OrderRepository extends BaseOrderRepository
             ->setParameter('orders', $ordersArray);
 
         return $query;
+    }
+    public function getOrdersByNumbers($numbers)
+    {
+        $qb =  $this->createQueryBuilder('o');
+        $query = $qb
+            ->where($qb->expr()->in('o.number', $numbers))
+            ->getQuery();
+
+        $res = $query->execute();
+
+        if (sizeof($res) == 0) {
+            return [];
+        }
+
+        return $res;
     }
 }

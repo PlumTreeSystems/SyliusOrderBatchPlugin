@@ -13,6 +13,21 @@ return [
     PTS\SyliusOrderBatchPlugin\PTSSyliusOrderBatchPlugin::class => ['all' => true],
 ];
 ```
+
+Import the bundle's configuration to your `_sylius.yaml` file
+
+```yaml
+imports:
+    - { resource: "@PTSSyliusOrderBatchPlugin/Resources/config/config.yml" }
+```
+
+Import the bundle's routes to your `routes.yaml` file
+
+```yaml
+pts_sylius_order_batch_plugin:
+  resource: "@PTSSyliusOrderBatchPlugin/Resources/config/routing.yml"
+```
+
 Copy the bundle's templates from `src/Resources/templates` to your project `templates/` folder
 
 ## Customize

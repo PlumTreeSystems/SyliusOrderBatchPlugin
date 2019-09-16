@@ -6,52 +6,13 @@ app:
   ui:
     projectTitle: 'Demo'
     adminHome: 'Demo'
-    customers: 'My Referrals'
     edit_filter: "Edit order filter"
     referrals: 'Referrals'
     batches: 'Batches'
     batch: 'Batch'
     new_filter: 'New filter'
-    emailTemplates: 'Emails'
-    documentTemplate: 'Documents'
-    templates: 'Templates'
     ordersFilters: "Order's filters"
-    useThisLinkToRefer: 'Use this link to refer new customers'
-    bellowAreYourCustomers: 'The table bellow contains all of your referred customers'
-    productRefer: 'Use this link to refer customers to this product'
     filters: 'Filters'
-    promoted_products: 'Promoted products'
-    featured_products: 'Featured Products'
-    new_promoted_product: 'New promoted product'
-    edit_promoted_product: 'Edit promoted product'
-    autoships: 'Autoships'
-    autoship: 'Autoship'
-    autoshipRuns: 'Running autoships'
-    shippingBatches: 'Shipping batches list'
-  promoted_product:
-    position: 'Position'
-    product: 'Product'
-    subheader: 'Manage promoted products'
-  customer:
-    inviteAsDistributor: 'Invite as distributor'
-    invitePending: 'Invite pending'
-  customers:
-    subheader: 'Manage all customers'
-  distributorInvite:
-    termsAndConditions: 'Agree to all terms and conditions'
-    title: 'Terms and conditions'
-    submitButton: 'Finish'
-  distributorThreshold:
-    title: 'Amount for distributor qualification'
-    amount: 'Required volume to qualify for distributor'
-    cooldownAmount: 'Maximum amount to spend in 7 days '
-    submitButton: 'Save'
-  productForm:
-    invitationForDistributorButton: 'Qualification item to become a distributor'
-    autoship: 'Is the product Autoshippable?'
-  channelPricingForm:
-    volumePoints: 'Product''s volume points'
-    autoshipPrice: 'Product''s autoship price'
   flashMessages:
     paymentMethodUpdatedSuccessfully: 'You have successfully updated the payment details associated with this autoship.'
     distributorPromotion: 'You were successfully promoted to Distributor status'
@@ -59,21 +20,6 @@ app:
     someItemsWereLostDuringTransfer: 'During cart transfer, some items were found that are not available in this channel''s store and have been removed from the cart'
     attemptChargeStarted: 'Started the "Attempt to charge again" operation in the background'
     outOfStockRunStarted: 'Started the "Run out of stock" operation in the background'
-  emailTemplatesList:
-    title: 'Email templates list'
-    subTitle: 'Manage email templates'
-    email: 'Email'
-  editEmailTemplates:
-    title: 'Edit templates'
-    attachmentsTitle: 'Attachments'
-    attachments: 'Attachment'
-    subject: 'Subject'
-    content: 'Content'
-    subTitle: 'Edit'
-    subTitleEnd: 'template'
-    availableParameters: 'Available parameters'
-  created_by: 'Created By'
-  your_store: 'Plum Tree Systems'
   saveFilterModal:
     title: 'Save filter'
     label: 'Filter name'
@@ -114,22 +60,6 @@ app:
     paymentState: 'Payment state'
     shippingState: 'Shipping state'
     shippingCountry: 'Shipping country'
-  documentTemplateList:
-    title: 'Document templates'
-    subTitle: 'Manage document templates'
-    document: 'Document'
-  editDocumentTemplates:
-    title: 'Edit templates'
-    subTitle: 'Edit'
-    subTitleEnd: 'template'
-    documentTitle: 'Document name'
-    messages:
-      error:
-        notExists: "Document does't exists"
-        dataCorrupted: "Parsing errors have occurred."
-  regenerateDocumentTemplate:
-    title: 'Regenerate modal'
-    label: 'Are you sure you want to regenerate this template?'
   batchShipping:
     title: 'Shipping batches list'
     subTitle: 'Manage all shipments batches'
@@ -144,81 +74,15 @@ app:
     tags: 'Tags'
   batchOutOfStock:
     subheader: 'Orders pending for stock'
-  runOutOfStockModel:
-    title: 'Run put of stock orders'
-    label: 'Are you sure you want to run these orders?'
-  runPaymentsModal:
-    title: 'Run orders with failed payments'
-    label: 'Are you sure you want to run these orders?'
   batchType:
     title: 'Batch types'
     subTitle: 'Select one of the types'
     other: "Other batches"
-    outOfStock: "Out of stock orders batch"
-    failedPayment: "Failed payments batch"
-    shipping: "Shipment batches"
   batchList:
     title: 'Batches'
   batchRemoveOrderModal:
     label: 'Are you sure you want to remove this item?'
     title: 'Remove order from batch'
-  batchMoveToShippedModal:
-    title: 'Move "ready" orders to state "shipped"'
-    label: 'Are you sure you want to change orders state?'
-  shopAutoshipRemoveOrderItem:
-    title: 'Delete item from order'
-    label: 'Are you sure you want to remove this item?'
-  checkout:
-    gdpr:
-      title: 'General Data Protection Regulation'
-      label: 'I agree to the provided terms'
-      mustAgree: 'You must agree to the provided terms'
-  adminAutoships:
-    subheader: 'Manage all autoships'
-  autoship:
-    smallprint: 'You will be billed for items with * in the cart monthly.'
-    checkbox: 'Autoship'
-    customerColumn: "Customer"
-    numberColumn: "Number"
-    dateCreatedColumn: "Created"
-    dateUpdatedColumn: "Last run at"
-    dateNextRunColumn: "Next run due"
-    shipTo: 'Ship to'
-    cost: 'Cost'
-    subTitle: 'Browse and manage your autoships'
-    lastRunAt: 'Last time run at'
-    addProductsSearch: 'Search for more products'
-    shippingMethod: "Shipping method"
-    autoshipDay: "Day of autoship"
-    autoshipCantBeEmpty: "Autoship must contain at least one item"
-    selectVariant: "Variant:"
-    lastRunAtDate: 'Last run at:'
-    enabled: 'Enabled'
-    modal:
-      disableModal:
-        title: "Disable autoship"
-        label: "Are you sure you want to disable this autoship"
-      enableModal:
-        title: "Enable autoship"
-        label: "Are you sure you want to enable this autoship"
-  autoshipRun:
-    createdAt: 'Created'
-    lastRunAt: 'Last run at'
-    state: 'Status'
-    progress: 'Progress'
-    subHeader: 'Information about autoship running'
-    status:
-      processing: 'Processing'
-      new: 'New'
-      completed: 'Completed'
-      inProgress: 'In progress'
-      createOrders: 'Creating orders'
-      ready: 'Ready'
-    message:
-      noAutoships: '0 autoships to run.'
-      autoshipsCreated: 'Successfully created'
-  autoships:
-    subTitle: "All your's autoships"
   newBatchModal:
     title: 'Save batch'
     label: 'Batch name'
@@ -232,29 +96,15 @@ app:
     subheader: 'Manage all orders'
   buttons:
     saveChanges: 'Save changes'
-    saveShippingMethod: 'Save shipping method'
-    savePaymentMethod: 'Update payment details'
-    saveShippingAddress: 'Save shipping address'
-    saveBillingAddress: 'Save billing address'
     cancel: 'Cancel'
     edit: 'Edit'
     preview: 'Preview'
     regenerate: 'Regenerate'
     remove: 'Remove'
     operations: 'Operations'
-    addToAutoship: 'Add to autoship'
     editShippingPaymentDetails: 'Edit shipping/payment details'
     enable: 'Enable'
     disable: 'Disable'
-  tableHeaders:
-    actions: 'Actions'
-  generateVariants:
-    stock: 'Stock'
-    tracked: 'Tracked'
-    prefill: 'Prefill Form'
-    fill: 'Fill'
-  product:
-    sku: 'SKU'
   messages:
     success:
       saved: 'Saved successfully!'

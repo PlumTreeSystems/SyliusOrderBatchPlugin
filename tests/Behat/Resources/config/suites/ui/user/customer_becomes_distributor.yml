@@ -1,0 +1,29 @@
+default:
+    suites:
+        ui_customer_becomes_distributor:
+            contexts_services:
+                - app.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.customer_group
+                - sylius.behat.context.transform.theme
+                - sylius.behat.context.transform.channel
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.theme
+                - sylius.behat.context.setup.customer_group
+                - sylius.behat.context.setup.shop_security
+                - sylius.behat.context.setup.user
+                - app.behat.context.setup.route
+                - app.behat.context.setup.email_template
+                - app.behat.context.setup.channel_context
+
+                - sylius.behat.context.ui.theme
+                - app.behat.context.ui.shop.distributor
+                - app.behat.context.ui.shop.referral
+                - app.behat.context.ui.extended.page
+
+            filters:
+                tags: "@customer_becomes_distributor && @simply && @ui && @simply_simple"
