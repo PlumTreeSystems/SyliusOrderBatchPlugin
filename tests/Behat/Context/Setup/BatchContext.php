@@ -8,6 +8,7 @@ use PTS\SyliusOrderBatchPlugin\Repository\OrderRepository;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class BatchContext implements Context

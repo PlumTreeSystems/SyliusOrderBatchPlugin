@@ -247,9 +247,7 @@ class ExtendedPageContext extends MinkContext implements Context
 
     public function clickLink($link)
     {
-        if ($this->getSession()->getDriver() instanceof Selenium2Driver) {
-            JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
-        }
+        JQueryHelper::waitForAsynchronousActionsToFinish($this->getSession());
         parent::clickLink($link);
     }
 
