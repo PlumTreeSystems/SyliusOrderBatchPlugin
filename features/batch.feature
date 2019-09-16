@@ -23,8 +23,7 @@ Feature: batch must contain all order functionality except batch creation which 
 
   @ui @mink:chrome
   Scenario: Create batch, adds more orders and check if it contains correct orders.
-    When I go to "/admin"
-    And I follow "Orders"
+    When I go to "/admin/orders"
     Then I should see "Filter"
     When I search for a "Number contains 10" filter
     And I select first option from autocomplete
