@@ -101,7 +101,3 @@ app_admin_export_orders_to_csv:
   path: /admin/batch/csv/{id}
   defaults:
     _controller: PTS\SyliusOrderBatchPlugin\Controller\FilesController::exportCSVAction
-pts_sylius_order_batch_plugin.print_invoice_batch_action:
-  path: /admin/batch/invoice/{id}
-  defaults:
-    _controller: sylius.controller.order:printInvoiceAction

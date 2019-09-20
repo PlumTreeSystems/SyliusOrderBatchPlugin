@@ -280,11 +280,6 @@ class OrderController extends \Sylius\Bundle\CoreBundle\Controller\OrderControll
 
         return $this->viewHandler->handle($configuration, $view);
     }
-    public function printInvoiceAction($id)
-    {
-        $batchRepo = $this->getDoctrine()->getRepository(Batch::class);
-        $batch = $batchRepo->find($id);
-    }
     public function resolveBatchTypeByGrid(string $gridName) {
         $parameters = $this->getParameter('grids');
         if (key_exists($gridName, $parameters)) {

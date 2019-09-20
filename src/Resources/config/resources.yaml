@@ -7,10 +7,6 @@ pts_sylius_order_batch:
     filter:
       classes:
         model: PTS\SyliusOrderBatchPlugin\Entity\Filter
-  actions:
-    print_invoice:
-      label: 'app.batch.printInvoice'
-      route: 'pts_sylius_order_batch_plugin.print_invoice_batch_action'
 sylius_resource:
   resources:
     app.filter:
