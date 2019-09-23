@@ -1,4 +1,5 @@
 <?php
+
 namespace PTS\SyliusOrderBatchPlugin\Controller;
 
 use PTS\SyliusOrderBatchPlugin\Entity\Batch;
@@ -23,10 +24,12 @@ class FilesController extends Controller
         /** @var Batch $batch */
         $batch = $batchRepo->find($id);
 
-        $response = new StreamedResponse(function() use($container, $id, $batchRepo) {
+        $response = new StreamedResponse(function () use ($container, $id, $batchRepo) {
 
             $batchOrdersIds = $batchRepo->getBatchOrders($id);
-            $batchOrders = array_map(function($array) {return $array['id'];}, $batchOrdersIds);
+            $batchOrders = array_map(function ($array) {
+                return $array['id'];
+            }, $batchOrdersIds);
 
             /** @var FilesExportingService $filesExporting */
             $filesExporting = $this->get('app.file_exporting.manager');
@@ -72,7 +75,7 @@ class FilesController extends Controller
         });
 
         $response->headers->set('Content-Type', 'application/force-download');
-        $response->headers->set('Content-Disposition','attachment; filename="' . $batch->getName() . '.csv"');
+        $response->headers->set('Content-Disposition', 'attachment; filename="' . $batch->getName() . '.csv"');
 
         $response->send();
     }
